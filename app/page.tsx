@@ -48,58 +48,97 @@ function OrnamentDivider() {
       aria-hidden="true"
       style={{ display: "flex", alignItems: "center", gap: "14px", padding: "4px 0" }}
     >
-      <span style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, var(--divider))" }} />
+      <span style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, var(--gold))", opacity: 0.35 }} />
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
         <path
           d="M9 1.5L10.4 7.6L16.5 9L10.4 10.4L9 16.5L7.6 10.4L1.5 9L7.6 7.6Z"
-          stroke="var(--accent-soft)"
+          stroke="var(--gold)"
           strokeWidth="0.9"
           fill="none"
-          opacity="0.55"
+          opacity="0.75"
         />
-        <circle cx="9" cy="9" r="1.6" fill="var(--accent-soft)" opacity="0.35" />
+        <circle cx="9" cy="9" r="1.6" fill="var(--gold-soft)" opacity="0.55" />
       </svg>
-      <span style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, var(--divider))" }} />
+      <span style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, var(--gold))", opacity: 0.35 }} />
     </div>
   );
 }
 
-/* ── Manuscript card corner ornaments ── */
+/* ── Manuscript card corner ornaments — illuminated gold ── */
 function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
   const flipX = position === "tr" || position === "br";
   const flipY = position === "bl" || position === "br";
   return (
     <svg
-      width="22"
-      height="22"
-      viewBox="0 0 22 22"
+      width="42"
+      height="42"
+      viewBox="0 0 42 42"
       fill="none"
       aria-hidden="true"
       style={{
         position: "absolute",
-        top: position.startsWith("t") ? "6px" : "auto",
-        bottom: position.startsWith("b") ? "6px" : "auto",
-        left: position.endsWith("l") ? "6px" : "auto",
-        right: position.endsWith("r") ? "6px" : "auto",
+        top: position.startsWith("t") ? "4px" : "auto",
+        bottom: position.startsWith("b") ? "4px" : "auto",
+        left: position.endsWith("l") ? "4px" : "auto",
+        right: position.endsWith("r") ? "4px" : "auto",
         transform: `scale(${flipX ? -1 : 1}, ${flipY ? -1 : 1})`,
-        opacity: 0.45,
+        opacity: 0.7,
         zIndex: 1,
       }}
     >
+      {/* Outer L-shaped bracket */}
       <path
-        d="M0 22 L0 5 Q0 0 5 0 L22 0"
-        stroke="var(--accent-soft)"
-        strokeWidth="1"
+        d="M2 40 L2 7 Q2 2 7 2 L40 2"
+        stroke="var(--gold)"
+        strokeWidth="1.2"
         fill="none"
       />
+      {/* Inner bracket */}
       <path
-        d="M0 16 L0 8 Q0 3 5 3 L16 3"
-        stroke="var(--accent)"
+        d="M5 34 L5 10 Q5 5 10 5 L34 5"
+        stroke="var(--gold-soft)"
         strokeWidth="0.7"
         fill="none"
         opacity="0.5"
       />
-      <circle cx="1" cy="1" r="1.5" fill="var(--accent-soft)" opacity="0.5" />
+      {/* Arabesque arm along top edge */}
+      <path
+        d="M10 2 C14 2 16 5 18 2"
+        stroke="var(--gold)"
+        strokeWidth="0.8"
+        fill="none"
+        opacity="0.6"
+      />
+      <path
+        d="M22 2 C26 2 28 5 30 2"
+        stroke="var(--gold)"
+        strokeWidth="0.8"
+        fill="none"
+        opacity="0.4"
+      />
+      {/* Arabesque arm along left edge */}
+      <path
+        d="M2 10 C2 14 5 16 2 18"
+        stroke="var(--gold)"
+        strokeWidth="0.8"
+        fill="none"
+        opacity="0.6"
+      />
+      <path
+        d="M2 22 C2 26 5 28 2 30"
+        stroke="var(--gold)"
+        strokeWidth="0.8"
+        fill="none"
+        opacity="0.4"
+      />
+      {/* 8-pointed star (rub el hizb) at corner tip */}
+      <polygon
+        points="5,2 5.9,4.6 8.5,4.6 6.4,6.2 7.2,8.8 5,7.2 2.8,8.8 3.6,6.2 1.5,4.6 4.1,4.6"
+        fill="var(--gold)"
+        opacity="0.85"
+      />
+      {/* Dot accent */}
+      <circle cx="5" cy="5" r="1" fill="var(--gold-soft)" opacity="0.9" />
     </svg>
   );
 }
@@ -107,36 +146,36 @@ function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
 /* ── Brand logo block (shared across screens) ── */
 function BrandLogo({ scaleIn = false }: { scaleIn?: boolean }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
       <span
         className={`brand-arabic${scaleIn ? " brand-scale-in" : ""}`}
         aria-hidden="true"
         style={{
           fontFamily: "var(--font-amiri), 'Scheherazade New', serif",
-          fontSize: "2.4rem",
+          fontSize: "3.6rem",
           lineHeight: 1.1,
-          color: "var(--accent)",
+          color: "var(--gold)",
           direction: "rtl",
         }}
       >
         أُمَّة
       </span>
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <span aria-hidden="true" style={{ display: "block", height: "1px", width: "52px", background: "var(--accent)", opacity: 0.45 }} />
+      <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+        <span aria-hidden="true" style={{ display: "block", height: "1px", width: "68px", background: "linear-gradient(to right, transparent, var(--gold))", opacity: 0.6 }} />
         <span
           className="brand-wordmark"
           style={{
-            fontFamily: "var(--font-lato)",
-            fontSize: "0.68rem",
-            letterSpacing: "0.3em",
+            fontFamily: "var(--font-playfair)",
+            fontSize: "0.82rem",
+            letterSpacing: "0.32em",
             textTransform: "uppercase",
-            color: "var(--accent)",
-            fontWeight: 500,
+            color: "var(--foreground)",
+            fontWeight: 400,
           }}
         >
           Ummah Speaks
         </span>
-        <span aria-hidden="true" style={{ display: "block", height: "1px", width: "52px", background: "var(--accent)", opacity: 0.45 }} />
+        <span aria-hidden="true" style={{ display: "block", height: "1px", width: "68px", background: "linear-gradient(to left, transparent, var(--gold))", opacity: 0.6 }} />
       </div>
     </div>
   );
@@ -157,7 +196,7 @@ function LoadingDots({ label }: { label: string }) {
       </div>
       <p
         className="text-xs tracking-[0.25em] uppercase"
-        style={{ color: "var(--placeholder)", fontFamily: "var(--font-lato)" }}
+        style={{ color: "var(--placeholder)", fontFamily: "var(--font-body)" }}
       >
         {label}
       </p>
@@ -366,10 +405,28 @@ export default function Home() {
   if (appPhase === "name-input") {
     return (
       <main
-        className="arabesque-bg min-h-screen flex flex-col items-center justify-center px-6 py-20"
+        className="arabesque-bg min-h-screen flex flex-col items-center justify-center px-6 py-20 md:pt-24"
         aria-label="Welcome to Ummah Speaks — enter your name to begin"
       >
         <div className="w-full max-w-md flex flex-col gap-10 fade-slide-in" style={{ position: "relative", zIndex: 1 }}>
+
+          {/* Bismillah */}
+          <div style={{ textAlign: "center" }}>
+            <span
+              aria-label="Bismillah ir-Rahman ir-Rahim"
+              style={{
+                fontFamily: "var(--font-amiri), serif",
+                fontSize: "1.15rem",
+                color: "var(--gold)",
+                direction: "rtl",
+                opacity: 0.6,
+                letterSpacing: "0.04em",
+                display: "block",
+              }}
+            >
+              بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+            </span>
+          </div>
 
           {/* Brand */}
           <BrandLogo scaleIn />
@@ -381,7 +438,7 @@ export default function Home() {
               aria-label="View salah prayer times"
               className="flex items-center gap-1.5 text-xs font-light tracking-widest uppercase px-4 py-2 rounded-full transition-all duration-200 hover:opacity-80"
               style={{
-                fontFamily: "var(--font-lato)",
+                fontFamily: "var(--font-body)",
                 border: "1px solid var(--divider)",
                 color: "var(--muted)",
                 letterSpacing: "0.18em",
@@ -411,7 +468,7 @@ export default function Home() {
             </h1>
             <p
               className="text-base font-light tracking-wide"
-              style={{ color: "var(--muted)", fontFamily: "var(--font-lato)" }}
+              style={{ color: "var(--muted)", fontFamily: "var(--font-body)" }}
             >
               I am here to listen.
             </p>
@@ -436,13 +493,13 @@ export default function Home() {
             style={{
               color: "var(--foreground)",
               caretColor: "var(--accent-soft)",
-              fontFamily: "var(--font-lato)",
+              fontFamily: "var(--font-body)",
               outline: "none",
             }}
           />
           <span id="name-hint" className="sr-only">Press Enter or click Begin to continue.</span>
 
-          <div aria-hidden="true" className="w-full h-px" style={{ background: "var(--divider)" }} />
+          <div aria-hidden="true" className="w-full h-px" style={{ background: "linear-gradient(to right, transparent, var(--gold), transparent)", opacity: 0.3 }} />
 
           {/* Begin button */}
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -453,8 +510,8 @@ export default function Home() {
               aria-label={nameInput.trim() ? `Begin as ${nameInput.trim()}` : "Enter your name to begin"}
               className={`text-xs font-light tracking-widest uppercase px-10 py-3 rounded-full transition-all duration-300${nameInput.trim() ? " begin-btn-active" : ""}`}
               style={{
-                fontFamily: "var(--font-lato)",
-                background: nameInput.trim() ? "var(--accent)" : "var(--divider)",
+                fontFamily: "var(--font-body)",
+                background: nameInput.trim() ? "var(--gold)" : "var(--divider)",
                 color: nameInput.trim() ? "var(--background)" : "var(--placeholder)",
                 cursor: nameInput.trim() ? "pointer" : "not-allowed",
                 letterSpacing: "0.22em",
@@ -502,7 +559,7 @@ export default function Home() {
   /* ════════════ GREETING SCREEN ════════════ */
   if (appPhase === "greeting") {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center px-6 py-20">
+      <main className="min-h-screen flex flex-col items-center justify-center px-6 py-20 md:pt-24">
         <div
           className="w-full max-w-md flex flex-col items-center gap-4 text-center"
           style={{
@@ -552,7 +609,7 @@ export default function Home() {
           </p>
           <p
             className="mt-2 text-base font-light tracking-wide"
-            style={{ color: "var(--muted)", fontFamily: "var(--font-lato)" }}
+            style={{ color: "var(--muted)", fontFamily: "var(--font-body)" }}
           >
             I am here to listen.
           </p>
@@ -575,7 +632,7 @@ export default function Home() {
           {islamicDate && (
             <p
               className="text-xs tracking-[0.2em] uppercase mt-1"
-              style={{ color: "var(--placeholder)", fontFamily: "var(--font-lato)", opacity: 0.75 }}
+              style={{ color: "var(--placeholder)", fontFamily: "var(--font-body)", opacity: 0.75 }}
             >
               {islamicDate}
             </p>
@@ -587,19 +644,20 @@ export default function Home() {
           <div className="flex flex-col gap-7">
             <header className="text-center">
               <h1
-                className="text-3xl sm:text-4xl leading-snug"
+                className="text-3xl sm:text-4xl md:text-5xl leading-tight"
                 style={{
                   fontFamily: "var(--font-playfair)",
                   color: "var(--foreground)",
                   fontStyle: "italic",
                   fontWeight: 400,
+                  textShadow: "0 0 40px color-mix(in srgb, var(--gold) 18%, transparent)",
                 }}
               >
                 How are you feeling today, {userName}?
               </h1>
               <p
-                className="mt-3 text-base font-light tracking-wide"
-                style={{ color: "var(--muted)", fontFamily: "var(--font-lato)" }}
+                className="mt-4 text-base font-light tracking-wide"
+                style={{ color: "var(--muted)", fontFamily: "var(--font-body)" }}
               >
                 I am here to listen.
               </p>
@@ -608,14 +666,7 @@ export default function Home() {
             <OrnamentDivider />
 
             <label htmlFor="feeling-input" className="sr-only">Share how you are feeling today</label>
-            <div
-              style={{
-                borderRadius: "16px",
-                background: "var(--surface)",
-                border: "1px solid var(--divider)",
-                padding: "20px 20px 16px",
-              }}
-            >
+            <div className="reflection-input">
               <textarea
                 id="feeling-input"
                 value={text}
@@ -624,14 +675,14 @@ export default function Home() {
                   if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) handleSubmit();
                 }}
                 placeholder="Begin whenever you are ready…"
-                rows={8}
+                rows={6}
                 aria-required="true"
                 aria-describedby="feeling-hint"
                 className="w-full resize-none bg-transparent border-none text-base leading-8 font-light"
                 style={{
                   color: "var(--foreground)",
                   caretColor: "var(--accent-soft)",
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   outline: "none",
                 }}
                 autoFocus
@@ -651,7 +702,7 @@ export default function Home() {
                   className="text-xs font-light tracking-wide select-none"
                   style={{
                     color: "var(--placeholder)",
-                    fontFamily: "var(--font-lato)",
+                    fontFamily: "var(--font-body)",
                     opacity: text.length > 0 ? 1 : 0,
                     transition: "opacity 0.3s",
                   }}
@@ -665,8 +716,8 @@ export default function Home() {
                   aria-label={canSubmit ? "Share your feelings and receive guidance" : "Write something to share"}
                   className="text-xs font-light tracking-widest uppercase px-6 py-2.5 rounded-full transition-all duration-300"
                   style={{
-                    fontFamily: "var(--font-lato)",
-                    background: canSubmit ? "var(--accent)" : "var(--divider)",
+                    fontFamily: "var(--font-body)",
+                    background: canSubmit ? "var(--gold)" : "var(--divider)",
                     color: canSubmit ? "var(--background)" : "var(--placeholder)",
                     cursor: canSubmit ? "pointer" : "not-allowed",
                     letterSpacing: "0.2em",
@@ -711,12 +762,12 @@ export default function Home() {
                   <p
                     className="text-xs tracking-[0.3em] uppercase"
                     aria-hidden="true"
-                    style={{ color: "var(--muted)", fontFamily: "var(--font-lato)" }}
+                    style={{ color: "var(--muted)", fontFamily: "var(--font-body)" }}
                   >
                     A theme for reflection
                   </p>
                   <p
-                    className="text-4xl sm:text-5xl"
+                    className="text-3xl sm:text-4xl"
                     style={{
                       fontFamily: "var(--font-playfair)",
                       color: "var(--accent)",
@@ -750,28 +801,31 @@ export default function Home() {
               {/* ── Hadith manuscript card ── */}
               {hadithStatus === "done" && hadith && (
                 <div
-                  className="manuscript-card fade-slide-in"
+                  className="manuscript-card vine-border fade-slide-in"
                   style={{ position: "relative" }}
                 >
+                  {/* Inner double-border ring */}
+                  <div className="inner-border" aria-hidden="true" />
+
                   {/* Corner ornaments */}
                   <CornerOrnament position="tl" />
                   <CornerOrnament position="tr" />
                   <CornerOrnament position="bl" />
                   <CornerOrnament position="br" />
 
-                  {/* Gradient top stripe */}
+                  {/* Gradient top stripe in gold */}
                   <div
                     aria-hidden="true"
                     style={{
                       height: "3px",
                       width: "100%",
-                      background: "linear-gradient(to right, var(--accent), var(--accent-soft), transparent)",
+                      background: "linear-gradient(to right, var(--gold), var(--gold-soft), transparent)",
                       position: "relative",
                       zIndex: 2,
                     }}
                   />
 
-                  <div className="px-8 py-8 flex flex-col gap-6" style={{ position: "relative", zIndex: 2 }}>
+                  <div className="px-4 py-5 sm:px-8 sm:py-8 flex flex-col gap-4 sm:gap-6" style={{ position: "relative", zIndex: 2 }}>
                     {/* Header ornament */}
                     <div className="flex flex-col items-center gap-2">
                       <span
@@ -789,7 +843,7 @@ export default function Home() {
                       </span>
                       <span
                         className="text-xs tracking-[0.28em] uppercase whitespace-nowrap"
-                        style={{ color: "var(--muted)", fontFamily: "var(--font-lato)" }}
+                        style={{ color: "var(--muted)", fontFamily: "var(--font-body)" }}
                       >
                         Guidance from the Sunnah
                       </span>
@@ -798,7 +852,7 @@ export default function Home() {
                     {hadith.header && (
                       <p
                         className="text-sm font-light leading-relaxed"
-                        style={{ color: "var(--muted)", fontFamily: "var(--font-lato)", fontStyle: "italic" }}
+                        style={{ color: "var(--muted)", fontFamily: "var(--font-body)", fontStyle: "italic" }}
                       >
                         {hadith.header}
                       </p>
@@ -827,8 +881,8 @@ export default function Home() {
                         className="text-base leading-8 font-light"
                         style={{
                           color: "var(--foreground)",
-                          fontFamily: "var(--font-lato)",
-                          borderLeft: "2px solid var(--accent-soft)",
+                          fontFamily: "var(--font-body)",
+                          borderLeft: "2px solid var(--gold)",
                           paddingLeft: "1.25rem",
                           margin: 0,
                         }}
@@ -842,7 +896,7 @@ export default function Home() {
                       <div className="flex items-baseline justify-between gap-2">
                         <span
                           className="text-xs font-semibold tracking-widest uppercase"
-                          style={{ color: "var(--accent)", fontFamily: "var(--font-lato)" }}
+                          style={{ color: "var(--accent)", fontFamily: "var(--font-body)" }}
                         >
                           {hadith.collection === "bukhari"
                             ? "Sahih al-Bukhari"
@@ -853,19 +907,19 @@ export default function Home() {
                         {hadith.hadithNumber != null && (
                           <span
                             className="text-xs font-semibold tracking-wide whitespace-nowrap"
-                            style={{ color: "var(--accent)", fontFamily: "var(--font-lato)" }}
+                            style={{ color: "var(--accent)", fontFamily: "var(--font-body)" }}
                           >
                             Hadith {hadith.hadithNumber}
                           </span>
                         )}
                       </div>
                       {hadith.bookName && (
-                        <p className="text-xs font-light leading-relaxed" style={{ color: "var(--muted)", fontFamily: "var(--font-lato)" }}>
+                        <p className="text-xs font-light leading-relaxed" style={{ color: "var(--muted)", fontFamily: "var(--font-body)" }}>
                           {hadith.bookName}
                         </p>
                       )}
                       {hadith.chapterName && (
-                        <p className="text-xs font-light leading-relaxed" style={{ color: "var(--placeholder)", fontFamily: "var(--font-lato)", fontStyle: "italic" }}>
+                        <p className="text-xs font-light leading-relaxed" style={{ color: "var(--placeholder)", fontFamily: "var(--font-body)", fontStyle: "italic" }}>
                           {hadith.chapterName}
                         </p>
                       )}
@@ -899,7 +953,7 @@ export default function Home() {
               {reflectionStatus === "done" && reflection && (
                 <div
                   className="mihrab-frame fade-slide-in"
-                  style={{ padding: "40px 28px 32px" }}
+                  style={{ padding: "clamp(20px, 6vw, 40px) clamp(14px, 5vw, 28px) clamp(18px, 5vw, 32px)" }}
                 >
                   {/* Inner accent arch line */}
                   <div
@@ -921,7 +975,7 @@ export default function Home() {
                       <span className="block h-px w-10" style={{ background: "var(--accent-soft)" }} />
                       <span
                         className="text-xs tracking-[0.3em] uppercase"
-                        style={{ color: "var(--accent-soft)", fontFamily: "var(--font-lato)" }}
+                        style={{ color: "var(--accent-soft)", fontFamily: "var(--font-body)" }}
                       >
                         A Message of Light
                       </span>
@@ -930,7 +984,7 @@ export default function Home() {
 
                     <p
                       aria-live="polite"
-                      className={`text-lg sm:text-xl leading-9 max-w-xl${isStreaming ? " streaming-cursor" : ""}`}
+                      className={`text-base sm:text-xl leading-8 sm:leading-9 max-w-xl${isStreaming ? " streaming-cursor" : ""}`}
                       style={{
                         fontFamily: "var(--font-playfair)",
                         color: "var(--foreground)",
@@ -946,21 +1000,21 @@ export default function Home() {
 
               {/* Error */}
               {status === "error" && (
-                <p className="text-center text-sm font-light" style={{ color: "#b45252", fontFamily: "var(--font-lato)" }}>
+                <p className="text-center text-sm font-light" style={{ color: "#b45252", fontFamily: "var(--font-body)" }}>
                   {errorMsg}
                 </p>
               )}
             </div>
 
             {/* ── Bottom action row ── */}
-            <div className="flex items-center justify-between pt-2" style={{ borderTop: "1px solid var(--divider)" }}>
+            <div className="flex items-center justify-between gap-3 pt-2 flex-wrap" style={{ borderTop: "1px solid var(--divider)" }}>
               <button
                 onClick={handleReset}
                 aria-label="Start over and write a new reflection"
                 className="text-xs font-light tracking-widest uppercase transition-opacity duration-200 hover:opacity-60 py-2"
                 style={{
                   color: "var(--muted)",
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   minHeight: "44px",
                   background: "none",
                   border: "none",
@@ -978,7 +1032,7 @@ export default function Home() {
                   aria-label={isDownloading ? "Saving…" : "Share or download this reflection"}
                   className="flex items-center gap-2 text-xs font-light tracking-widest uppercase px-5 py-2 rounded-full transition-all duration-300 hover:opacity-75"
                   style={{
-                    fontFamily: "var(--font-lato)",
+                    fontFamily: "var(--font-body)",
                     border: "1px solid var(--divider)",
                     color: "var(--muted)",
                     letterSpacing: "0.2em",

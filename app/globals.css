@@ -1,40 +1,40 @@
 @import "tailwindcss";
 
-/* ── Light mode ── */
+/* ── Dark mode only ── */
 :root {
-  --background: #f5f0e8;        /* warm parchment beige        */
-  --surface:    #ede8de;        /* slightly deeper for contrast */
-  --foreground: #1c2b1e;        /* deep forest, almost black    */
-  --accent:     #2d5a3d;        /* rich dark green              */
-  --accent-soft:#4a7c59;        /* lighter green for hover/caret*/
-  --muted:      #6b7c6e;        /* muted sage                   */
-  --divider:    #d4ccbb;        /* soft beige divider           */
-  --placeholder:#a8b5a3;        /* sage-tinted placeholder      */
-}
-
-/* ── Dark mode ── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #121a13;
-    --surface:    #1a241b;
-    --foreground: #e8e2d4;
-    --accent:     #7bb893;
-    --accent-soft:#9fd1ae;
-    --muted:      #7a9480;
-    --divider:    #2a3a2c;
-    --placeholder:#3d5240;
-  }
+  --background:   #0d1117;      /* deep near-black              */
+  --surface:      #131b1d;      /* deep teal-black card surface */
+  --foreground:   #f0e6d3;      /* warm cream-gold text         */
+  --accent:       #52b788;      /* vibrant emerald              */
+  --accent-soft:  #74c69d;      /* lighter emerald hover/caret  */
+  --gold:         #d4a843;      /* luminous Islamic gold        */
+  --gold-soft:    #e8c272;      /* soft gold for glows          */
+  --muted:        #9a8a72;      /* warm brown-muted             */
+  --divider:      #1e2a20;      /* deep subtle divider          */
+  --placeholder:  #4a5c50;      /* muted dark placeholder       */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-gold:       var(--gold);
   --font-heading: var(--font-playfair);
-  --font-body:    var(--font-lato);
+  --font-body:    var(--font-body);
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Remove 300ms tap delay on mobile for all interactive elements */
+button, a, input, textarea, select {
+  touch-action: manipulation;
+}
+
+/* Smooth scrolling for the whole page */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* Screen-reader only — visually hidden but accessible */
@@ -67,7 +67,7 @@ body {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-lato), "Helvetica Neue", sans-serif;
+  font-family: var(--font-body), "Georgia", serif;
 }
 
 textarea::placeholder {
@@ -89,6 +89,16 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
   background-repeat: repeat;
   opacity: 0.6;
+}
+
+/* Radial vignette — darkens edges, draws eye to centre content */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(0, 0, 0, 0.48) 100%);
 }
 
 main {
@@ -115,22 +125,26 @@ main {
 @keyframes arabicGlow {
   0%, 100% {
     text-shadow:
-      0 0 10px color-mix(in srgb, var(--accent) 45%, transparent),
-      0 0 24px color-mix(in srgb, var(--accent) 22%, transparent);
+      0 0 10px color-mix(in srgb, var(--gold) 50%, transparent),
+      0 0 24px color-mix(in srgb, var(--accent) 25%, transparent);
   }
   50% {
     text-shadow:
-      0 0 16px color-mix(in srgb, var(--accent) 65%, transparent),
-      0 0 36px color-mix(in srgb, var(--accent) 32%, transparent);
+      0 0 18px color-mix(in srgb, var(--gold) 70%, transparent),
+      0 0 38px color-mix(in srgb, var(--accent) 35%, transparent);
   }
 }
 
 @keyframes wordmarkGlow {
   0%, 100% {
-    text-shadow: 0 0 8px color-mix(in srgb, var(--accent) 30%, transparent);
+    text-shadow:
+      0 0 8px color-mix(in srgb, var(--gold) 35%, transparent),
+      0 0 16px color-mix(in srgb, var(--accent) 20%, transparent);
   }
   50% {
-    text-shadow: 0 0 14px color-mix(in srgb, var(--accent) 50%, transparent);
+    text-shadow:
+      0 0 14px color-mix(in srgb, var(--gold) 55%, transparent),
+      0 0 28px color-mix(in srgb, var(--accent) 30%, transparent);
   }
 }
 
@@ -146,13 +160,13 @@ main {
 @keyframes sheikCardPulse {
   0%, 100% {
     box-shadow:
-      0 4px 20px color-mix(in srgb, var(--accent) 18%, transparent),
-      0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent);
+      0 4px 20px color-mix(in srgb, var(--gold) 15%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--gold) 25%, transparent);
   }
   50% {
     box-shadow:
-      0 6px 32px color-mix(in srgb, var(--accent) 30%, transparent),
-      0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent);
+      0 6px 32px color-mix(in srgb, var(--gold) 28%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--gold) 50%, transparent);
   }
 }
 
@@ -172,10 +186,10 @@ main {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5L33.8 24.2L51 18L39.5 32.5L54 39L35.8 36.2L30 55L24.2 36.2L6 39L20.5 32.5L9 18L26.2 24.2Z' fill='none' stroke='%232d5a3d' stroke-width='0.55'/%3E%3Ccircle cx='30' cy='30' r='3.5' fill='none' stroke='%232d5a3d' stroke-width='0.5'/%3E%3Ccircle cx='30' cy='30' r='1.2' fill='%232d5a3d' opacity='0.4'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5L33.8 24.2L51 18L39.5 32.5L54 39L35.8 36.2L30 55L24.2 36.2L6 39L20.5 32.5L9 18L26.2 24.2Z' fill='none' stroke='%23d4a843' stroke-width='0.55'/%3E%3Ccircle cx='30' cy='30' r='3.5' fill='none' stroke='%23d4a843' stroke-width='0.5'/%3E%3Ccircle cx='30' cy='30' r='1.2' fill='%23d4a843' opacity='0.4'/%3E%3C/svg%3E");
   background-size: 60px 60px;
   background-repeat: repeat;
-  opacity: 0.045;
+  opacity: 0.055;
 }
 
 /* ── Brand logo spring scale-in ── */
@@ -208,9 +222,25 @@ main {
 .mihrab-frame {
   border-radius: 120px 120px 16px 16px / 44px 44px 16px 16px;
   background: var(--surface);
-  border: 1px solid var(--divider);
+  border: 1px solid color-mix(in srgb, var(--gold) 20%, var(--divider));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold) 8%, transparent);
   position: relative;
   overflow: hidden;
+}
+
+/* Gold arc accent at the top of the mihrab arch */
+.mihrab-frame::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--gold), var(--gold-soft), var(--gold), transparent);
+  border-radius: 0 0 50% 50%;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* ── Manuscript double-border card (hadith) ── */
@@ -218,17 +248,22 @@ main {
   position: relative;
   border-radius: 20px;
   background: var(--surface);
-  border: 1px solid var(--divider);
-  box-shadow: 0 2px 28px rgba(45, 90, 61, 0.08);
-  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--gold) 22%, var(--divider));
+  box-shadow:
+    0 2px 28px color-mix(in srgb, var(--gold) 8%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--gold) 10%, transparent);
+  overflow: visible;
+  padding-top: 22px;
+  padding-bottom: 22px;
 }
 
-.manuscript-card::before {
-  content: "";
+/* vine-border stripes are painted inside here via separate ::before/::after
+   so we need a second pseudo-element layer for the inner double-border */
+.manuscript-card .inner-border {
   position: absolute;
   inset: 5px;
   border-radius: 15px;
-  border: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold) 18%, transparent);
   pointer-events: none;
   z-index: 0;
 }
@@ -246,9 +281,9 @@ main {
 
 /* ── Tasbeeh tap feedback ── */
 @keyframes tasbeehPulse {
-  0%   { transform: scale(1);    }
-  40%  { transform: scale(0.95); }
-  100% { transform: scale(1);    }
+  0%   { transform: scale(1);    box-shadow: 0 0 0 0   color-mix(in srgb, var(--gold) 0%,  transparent); }
+  40%  { transform: scale(0.95); box-shadow: 0 0 0 8px color-mix(in srgb, var(--gold) 32%, transparent); }
+  100% { transform: scale(1);    box-shadow: 0 0 0 0   color-mix(in srgb, var(--gold) 0%,  transparent); }
 }
 
 .tasbeeh-tap {
@@ -257,9 +292,9 @@ main {
 
 /* ── Tasbeeh complete flash ── */
 @keyframes completeFlash {
-  0%   { background: var(--surface); }
-  40%  { background: color-mix(in srgb, var(--accent) 15%, var(--surface)); }
-  100% { background: var(--surface); }
+  0%   { background: var(--surface); box-shadow: 0 0 0 0   color-mix(in srgb, var(--gold) 0%,  transparent); }
+  40%  { background: color-mix(in srgb, var(--gold) 14%, var(--surface)); box-shadow: 0 0 0 10px color-mix(in srgb, var(--gold) 25%, transparent); }
+  100% { background: var(--surface); box-shadow: 0 0 0 0   color-mix(in srgb, var(--gold) 0%,  transparent); }
 }
 
 .tasbeeh-complete {
@@ -272,22 +307,88 @@ main {
   -webkit-backdrop-filter: blur(14px);
 }
 
+/* ── Reflection textarea container ── */
+.reflection-input {
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--gold) 18%, var(--divider));
+  padding: clamp(14px, 4vw, 20px);
+  padding-bottom: 12px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.reflection-input:focus-within {
+  border-color: color-mix(in srgb, var(--gold) 45%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 10%, transparent),
+              0 4px 24px color-mix(in srgb, var(--gold) 8%, transparent);
+}
+
 /* ── Journal card expand transition ── */
 .journal-card {
   transition: box-shadow 0.2s ease;
 }
 
 .journal-card:hover {
-  box-shadow: 0 4px 20px rgba(45, 90, 61, 0.1);
+  box-shadow:
+    0 4px 20px color-mix(in srgb, var(--gold) 12%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--gold) 15%, transparent);
 }
 
-/* ── Mobile bottom padding for BottomNav ── */
+/* ── Mobile bottom padding / Desktop top padding for nav ── */
 .has-bottom-nav {
   padding-bottom: 5.5rem;
 }
 
 @media (min-width: 768px) {
   .has-bottom-nav {
-    padding-bottom: 0;
+    padding-bottom: 2rem;
+    padding-top: 4.5rem;
   }
+}
+
+/* ── Arabesque vine scroll border (top + bottom edges) ── */
+/*
+  The SVG encodes a repeating gold arabesque vine:
+  a flowing sinusoidal stem with leaf pairs branching off every wave,
+  small circle buds at the peaks, and a diamond ornament at centre.
+  stroke colour is hardcoded to #d4a843 (--gold) so it works inside
+  data-URI without needing CSS variable resolution.
+*/
+.vine-border {
+  position: relative;
+}
+
+.vine-border::before,
+.vine-border::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 22px;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='22'%3E%3C!-- main vine wave --%3E%3Cpath d='M0 11 C10 4 20 4 30 11 C40 18 50 18 60 11 C70 4 80 4 90 11 C100 18 110 18 120 11' fill='none' stroke='%23d4a843' stroke-width='1.2'/%3E%3C!-- left leaf up --%3E%3Cpath d='M15 7.5 C17 4 21 4 22 7' fill='none' stroke='%23d4a843' stroke-width='0.9'/%3E%3C!-- left leaf down --%3E%3Cpath d='M45 14.5 C47 18 51 18 52 15' fill='none' stroke='%23d4a843' stroke-width='0.9'/%3E%3C!-- right leaf up --%3E%3Cpath d='M75 7.5 C77 4 81 4 82 7' fill='none' stroke='%23d4a843' stroke-width='0.9'/%3E%3C!-- right leaf down --%3E%3Cpath d='M105 14.5 C107 18 111 18 112 15' fill='none' stroke='%23d4a843' stroke-width='0.9'/%3E%3C!-- bud at left peak --%3E%3Ccircle cx='30' cy='11' r='1.6' fill='%23d4a843' opacity='0.85'/%3E%3C!-- bud at right peak --%3E%3Ccircle cx='90' cy='11' r='1.6' fill='%23d4a843' opacity='0.85'/%3E%3C!-- centre diamond ornament --%3E%3Cpath d='M60 7 L63.2 11 L60 15 L56.8 11 Z' fill='none' stroke='%23d4a843' stroke-width='0.9'/%3E%3Ccircle cx='60' cy='11' r='1' fill='%23d4a843' opacity='0.7'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 120px 22px;
+}
+
+.vine-border::before {
+  top: 0;
+}
+
+.vine-border::after {
+  bottom: 0;
+  transform: scaleY(-1);
+}
+
+/* ── Kufic geometric interlace frame ── */
+/*
+  border-image with an SVG tile of interlocking 8-pointed stars
+  in the accent emerald. The 9-slice value of 12 carves corners
+  cleanly so the repeat looks continuous on all four sides.
+*/
+.kufic-border {
+  border: 10px solid transparent;
+  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3C!-- outer square --%3E%3Crect x='1' y='1' width='46' height='46' fill='none' stroke='%2352b788' stroke-width='0.6'/%3E%3C!-- 8-pointed star (two overlapping squares) --%3E%3Cpolygon points='24,4 27.5,16.5 40,13 30.5,22 40,31 27.5,27.5 24,40 20.5,27.5 8,31 17.5,22 8,13 20.5,16.5' fill='none' stroke='%2352b788' stroke-width='0.8'/%3E%3C!-- inner square rotated 45 --%3E%3Crect x='17' y='17' width='14' height='14' fill='none' stroke='%2352b788' stroke-width='0.6' transform='rotate(45 24 24)'/%3E%3C!-- centre dot --%3E%3Ccircle cx='24' cy='24' r='2' fill='%2352b788' opacity='0.5'/%3E%3C/svg%3E") 12 round;
+  border-radius: 20px;
 }

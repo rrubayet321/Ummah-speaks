@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import * as adhan from "adhan";
 import { CITIES, City } from "../data/cities";
+import { BackButton, CompactBrand } from "./ui";
 
 /* ─── Types ─── */
 interface PrayerTime {
@@ -95,7 +96,7 @@ function SectionDivider({ label }: { label: string }) {
       <span style={{ flex: 1, height: "1px", background: "var(--divider)" }} />
       <span
         style={{
-          fontFamily: "var(--font-lato)",
+          fontFamily: "var(--font-body)",
           fontSize: "0.58rem",
           letterSpacing: "0.28em",
           textTransform: "uppercase",
@@ -130,7 +131,7 @@ function ClockDisplay({ now, tz }: { now: Date; tz: string }) {
       <span
         aria-hidden="true"
         style={{
-          fontFamily: "var(--font-lato)",
+          fontFamily: "var(--font-body)",
           fontWeight: 300,
           fontSize: "clamp(2.6rem, 10vw, 3.8rem)",
           color: "var(--foreground)",
@@ -144,7 +145,7 @@ function ClockDisplay({ now, tz }: { now: Date; tz: string }) {
       <span
         aria-hidden="true"
         style={{
-          fontFamily: "var(--font-lato)",
+          fontFamily: "var(--font-body)",
           fontWeight: 300,
           fontSize: "clamp(1.3rem, 4vw, 1.8rem)",
           color: "var(--muted)",
@@ -161,7 +162,7 @@ function ClockDisplay({ now, tz }: { now: Date; tz: string }) {
       <span
         aria-hidden="true"
         style={{
-          fontFamily: "var(--font-lato)",
+          fontFamily: "var(--font-body)",
           fontWeight: 300,
           fontSize: "0.68rem",
           letterSpacing: "0.14em",
@@ -249,7 +250,7 @@ function CityCarousel({
         id="city-carousel-label"
         style={{
           textAlign: "center",
-          fontFamily: "var(--font-lato)",
+          fontFamily: "var(--font-body)",
           fontSize: "0.62rem",
           letterSpacing: "0.26em",
           textTransform: "uppercase",
@@ -299,7 +300,7 @@ function CityCarousel({
                 <p style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(0.9rem, 2.5vw, 1.1rem)", fontWeight: 400, color: "var(--foreground)", lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", margin: 0 }}>
                   {prevCity.name}
                 </p>
-                <p style={{ fontFamily: "var(--font-lato)", fontSize: "0.58rem", letterSpacing: "0.08em", color: "var(--muted)", margin: "2px 0 0", whiteSpace: "nowrap" }}>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.58rem", letterSpacing: "0.08em", color: "var(--muted)", margin: "2px 0 0", whiteSpace: "nowrap" }}>
                   {prevCity.country}
                 </p>
               </>
@@ -328,7 +329,7 @@ function CityCarousel({
                 <p style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(1.5rem, 5vw, 1.95rem)", fontWeight: 500, color: "var(--foreground)", lineHeight: 1.15, margin: 0 }}>
                   {CITIES[selectedIndex].name}
                 </p>
-                <p style={{ fontFamily: "var(--font-lato)", fontSize: "0.62rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)", margin: "5px 0 0" }}>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.62rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)", margin: "5px 0 0" }}>
                   {CITIES[selectedIndex].country}
                 </p>
               </>
@@ -361,7 +362,7 @@ function CityCarousel({
                 <p style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(0.9rem, 2.5vw, 1.1rem)", fontWeight: 400, color: "var(--foreground)", lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", margin: 0 }}>
                   {nextCity.name}
                 </p>
-                <p style={{ fontFamily: "var(--font-lato)", fontSize: "0.58rem", letterSpacing: "0.08em", color: "var(--muted)", margin: "2px 0 0", whiteSpace: "nowrap" }}>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.58rem", letterSpacing: "0.08em", color: "var(--muted)", margin: "2px 0 0", whiteSpace: "nowrap" }}>
                   {nextCity.country}
                 </p>
               </>
@@ -385,7 +386,7 @@ function CityCarousel({
           aria-valuetext={`${CITIES[selectedIndex].name}, ${CITIES[selectedIndex].country}`}
           style={{ width: "100%" }}
         />
-        <p style={{ textAlign: "center", fontFamily: "var(--font-lato)", fontSize: "0.58rem", letterSpacing: "0.18em", color: "var(--placeholder)", margin: 0 }}>
+        <p style={{ textAlign: "center", fontFamily: "var(--font-body)", fontSize: "0.58rem", letterSpacing: "0.18em", color: "var(--placeholder)", margin: 0 }}>
           {selectedIndex + 1} of {total} cities
         </p>
       </div>
@@ -419,7 +420,7 @@ function PrayerRow({
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "15px 22px",
+        padding: "clamp(11px, 3vw, 15px) clamp(14px, 4vw, 22px)",
         borderRadius: "14px",
         background: isNext ? "var(--accent)" : "var(--surface)",
         border: isNext
@@ -482,7 +483,7 @@ function PrayerRow({
           className="tabular-nums"
           aria-hidden="true"
           style={{
-            fontFamily: "var(--font-lato)",
+            fontFamily: "var(--font-body)",
             fontWeight: 300,
             fontSize: "clamp(0.95rem, 3vw, 1.1rem)",
             letterSpacing: "0.04em",
@@ -495,7 +496,7 @@ function PrayerRow({
 
         {isNext && (
           <span aria-hidden="true" style={{
-            fontFamily: "var(--font-lato)",
+            fontFamily: "var(--font-body)",
             fontSize: "0.56rem",
             letterSpacing: "0.24em",
             textTransform: "uppercase",
@@ -506,7 +507,7 @@ function PrayerRow({
         )}
         {isCurrent && (
           <span aria-hidden="true" style={{
-            fontFamily: "var(--font-lato)",
+            fontFamily: "var(--font-body)",
             fontSize: "0.56rem",
             letterSpacing: "0.24em",
             textTransform: "uppercase",
@@ -529,7 +530,7 @@ function PrayerRowSkeleton() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "15px 22px",
+        padding: "clamp(11px, 3vw, 15px) clamp(14px, 4vw, 22px)",
         borderRadius: "14px",
         background: "var(--surface)",
         border: "1px solid var(--divider)",
@@ -596,39 +597,18 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
 
   return (
     <main
-      className="min-h-screen flex flex-col items-center justify-start px-5 py-10 sm:py-14 has-bottom-nav"
+      className="min-h-screen flex flex-col items-center justify-start px-5 py-10 sm:py-14 has-bottom-nav md:pt-20"
       aria-label={`Prayer times for ${selectedCity.name}`}
     >
+      {/* ── Fixed back button (mobile only — desktop uses top nav) ── */}
+      <BackButton onClick={onBack} />
+
       <div className="w-full max-w-xl flex flex-col gap-7 fade-slide-in">
 
         {/* ── Header ── */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
           {/* Brand logo */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
-            <span
-              className="brand-arabic"
-              aria-hidden="true"
-              style={{
-                fontFamily: "var(--font-amiri), 'Scheherazade New', serif",
-                fontSize: "2rem",
-                lineHeight: 1.1,
-                color: "var(--accent)",
-                direction: "rtl",
-              }}
-            >
-              أُمَّة
-            </span>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <span aria-hidden="true" style={{ display: "block", height: "1px", width: "44px", background: "var(--accent)", opacity: 0.5 }} />
-              <span
-                className="brand-wordmark"
-                style={{ fontFamily: "var(--font-lato)", fontSize: "0.7rem", letterSpacing: "0.28em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 500 }}
-              >
-                Ummah Speaks
-              </span>
-              <span aria-hidden="true" style={{ display: "block", height: "1px", width: "44px", background: "var(--accent)", opacity: 0.5 }} />
-            </div>
-          </div>
+          <CompactBrand />
 
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <CrescentIcon />
@@ -661,7 +641,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px", padding: "28px 24px 24px" }}>
 
             <p style={{
-              fontFamily: "var(--font-lato)",
+              fontFamily: "var(--font-body)",
               fontSize: "0.64rem",
               letterSpacing: "0.24em",
               textTransform: "uppercase",
@@ -681,7 +661,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
             <ClockDisplay now={now} tz={selectedCity.timezone} />
 
             <p style={{
-              fontFamily: "var(--font-lato)",
+              fontFamily: "var(--font-body)",
               fontWeight: 300,
               fontSize: "0.72rem",
               letterSpacing: "0.05em",
@@ -704,7 +684,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
                   padding: "6px 18px",
                   borderRadius: "999px",
                   background: "var(--accent)",
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   fontSize: "0.65rem",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
@@ -720,7 +700,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
                   padding: "6px 18px",
                   borderRadius: "999px",
                   border: "1px solid var(--divider)",
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   fontSize: "0.65rem",
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
@@ -784,7 +764,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
         {/* ── Footer ── */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "18px", paddingTop: "4px" }}>
           <p style={{
-            fontFamily: "var(--font-lato)",
+            fontFamily: "var(--font-body)",
             fontSize: "0.62rem",
             letterSpacing: "0.12em",
             color: "var(--placeholder)",
@@ -830,7 +810,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
               {/* Hook line */}
               <div aria-hidden="true" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <span style={{
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   fontSize: "0.58rem",
                   letterSpacing: "0.28em",
                   textTransform: "uppercase",
@@ -857,7 +837,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
 
               {/* Sheikh attribution */}
               <p style={{
-                fontFamily: "var(--font-lato)",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.75rem",
                 fontWeight: 300,
                 color: "var(--muted)",
@@ -894,7 +874,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
                   </svg>
                 </span>
                 <span style={{
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   fontSize: "0.65rem",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
@@ -904,7 +884,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
                   Watch Free on YouTube
                 </span>
                 <span aria-hidden="true" style={{
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   fontSize: "0.65rem",
                   color: "var(--muted)",
                   marginLeft: "auto",
@@ -916,26 +896,6 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
             </div>
           </a>
 
-          <button
-            onClick={onBack}
-            aria-label="Return to main screen"
-            style={{
-              fontFamily: "var(--font-lato)",
-              fontSize: "0.62rem",
-              letterSpacing: "0.24em",
-              textTransform: "uppercase",
-              color: "var(--muted)",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "4px 0",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--foreground)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
-          >
-            Back
-          </button>
         </div>
 
       </div>

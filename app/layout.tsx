@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Lato, Cormorant_Garamond, Amiri } from "next/font/google";
+import { Playfair_Display, EB_Garamond, Cormorant_Garamond, Amiri } from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -10,10 +10,11 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const lato = Lato({
-  variable: "--font-lato",
+const ebGaramond = EB_Garamond({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#2d5a3d",
+  themeColor: "#0d1117",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -69,7 +70,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon.svg" />
       </head>
       <body
-        className={`${playfair.variable} ${lato.variable} ${cormorant.variable} ${amiri.variable} antialiased`}
+        className={`${playfair.variable} ${ebGaramond.variable} ${cormorant.variable} ${amiri.variable} antialiased`}
       >
         {children}
       </body>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { BackButton, CompactBrand } from "./ui";
 
 interface DhikrPhase {
   arabic: string;
@@ -137,36 +138,16 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
     <main
       className="min-h-screen flex flex-col items-center justify-start px-5 has-bottom-nav"
       style={{ paddingTop: "3rem" }}
+
       aria-label="Tasbeeh — dhikr counter"
     >
+      {/* ── Fixed back button (mobile only — desktop uses top nav) ── */}
+      <BackButton onClick={onBack} />
+
       <div className="w-full max-w-sm flex flex-col gap-8 fade-slide-in">
 
         {/* Brand */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
-          <span
-            className="brand-arabic"
-            aria-hidden="true"
-            style={{
-              fontFamily: "var(--font-amiri), 'Scheherazade New', serif",
-              fontSize: "2rem",
-              lineHeight: 1.1,
-              color: "var(--accent)",
-              direction: "rtl",
-            }}
-          >
-            أُمَّة
-          </span>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <span aria-hidden="true" style={{ display: "block", height: "1px", width: "44px", background: "var(--accent)", opacity: 0.5 }} />
-            <span
-              className="brand-wordmark"
-              style={{ fontFamily: "var(--font-lato)", fontSize: "0.7rem", letterSpacing: "0.28em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 500 }}
-            >
-              Ummah Speaks
-            </span>
-            <span aria-hidden="true" style={{ display: "block", height: "1px", width: "44px", background: "var(--accent)", opacity: 0.5 }} />
-          </div>
-        </div>
+        <CompactBrand />
 
         {/* Title */}
         <div style={{ textAlign: "center" }}>
@@ -184,7 +165,7 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
           </h1>
           <p
             style={{
-              fontFamily: "var(--font-lato)",
+              fontFamily: "var(--font-body)",
               fontSize: "0.7rem",
               fontWeight: 300,
               letterSpacing: "0.16em",
@@ -229,11 +210,11 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
         {/* Main counter */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "20px" }}>
           {/* SVG ring + button */}
-          <div style={{ position: "relative", width: "200px", height: "200px" }}>
+          <div style={{ position: "relative", width: "clamp(160px, 52vw, 200px)", height: "clamp(160px, 52vw, 200px)" }}>
             {/* Background ring */}
             <svg
-              width="200"
-              height="200"
+              width="100%"
+              height="100%"
               viewBox="0 0 120 120"
               style={{ position: "absolute", inset: 0 }}
               aria-hidden="true"
@@ -274,12 +255,13 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
                 inset: "14px",
                 borderRadius: "50%",
                 background: allComplete
-                  ? "color-mix(in srgb, var(--accent) 15%, var(--surface))"
+                  ? "color-mix(in srgb, var(--gold) 14%, var(--surface))"
                   : phaseComplete
-                  ? "color-mix(in srgb, var(--accent) 12%, var(--surface))"
+                  ? "color-mix(in srgb, var(--gold) 10%, var(--surface))"
                   : "var(--surface)",
                 border: "none",
                 cursor: allComplete ? "default" : "pointer",
+                overflow: "visible",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -308,7 +290,7 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
                   <span
                     aria-hidden="true"
                     style={{
-                      fontFamily: "var(--font-lato)",
+                      fontFamily: "var(--font-body)",
                       fontWeight: 300,
                       fontSize: "2.4rem",
                       color: "var(--foreground)",
@@ -321,7 +303,7 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
                   <span
                     aria-hidden="true"
                     style={{
-                      fontFamily: "var(--font-lato)",
+                      fontFamily: "var(--font-body)",
                       fontSize: "0.6rem",
                       letterSpacing: "0.18em",
                       textTransform: "uppercase",
@@ -397,7 +379,7 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
                 </p>
                 <p
                   style={{
-                    fontFamily: "var(--font-lato)",
+                    fontFamily: "var(--font-body)",
                     fontSize: "0.75rem",
                     fontWeight: 300,
                     color: "var(--muted)",
@@ -428,7 +410,7 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
               <span
                 key={phase.transliteration}
                 style={{
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   fontSize: "0.62rem",
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
@@ -448,7 +430,7 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
             onClick={handleReset}
             aria-label="Reset dhikr counter to beginning"
             style={{
-              fontFamily: "var(--font-lato)",
+              fontFamily: "var(--font-body)",
               fontSize: "0.62rem",
               letterSpacing: "0.22em",
               textTransform: "uppercase",
@@ -466,29 +448,6 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
           </button>
         </div>
 
-        {/* Desktop back */}
-        <div className="hidden md:flex justify-center pb-6">
-          <button
-            onClick={onBack}
-            aria-label="Return to main screen"
-            style={{
-              fontFamily: "var(--font-lato)",
-              fontSize: "0.62rem",
-              letterSpacing: "0.24em",
-              textTransform: "uppercase",
-              color: "var(--muted)",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "4px 0",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--foreground)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
-          >
-            ← Back
-          </button>
-        </div>
 
       </div>
     </main>

@@ -82,101 +82,195 @@ const TABS: TabConfig[] = [
 
 export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   return (
-    <nav
-      aria-label="Main navigation"
-      className="bottom-nav-blur md:hidden"
-      style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        background: "color-mix(in srgb, var(--background) 88%, transparent)",
-        borderTop: "1px solid var(--divider)",
-        padding: "8px 12px calc(8px + env(safe-area-inset-bottom))",
-      }}
-    >
-      <div
+    <>
+      {/* ── Mobile bottom bar (hidden on md+) ── */}
+      <nav
+        aria-label="Main navigation"
+        className="bottom-nav-blur md:hidden"
         style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          maxWidth: "440px",
-          margin: "0 auto",
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          background: "color-mix(in srgb, var(--background) 88%, transparent)",
+          borderTop: "1px solid color-mix(in srgb, var(--gold) 15%, var(--divider))",
+          padding: "8px 12px calc(8px + env(safe-area-inset-bottom))",
         }}
       >
-        {TABS.map((tab) => {
-          const isActive = tab.id === activeTab;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => onTabChange(tab.id)}
-              role="tab"
-              aria-selected={isActive}
-              aria-label={`${tab.label} — ${tab.arabicLabel}`}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "3px",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: "6px 12px",
-                borderRadius: "12px",
-                minWidth: "60px",
-                minHeight: "44px",
-                justifyContent: "center",
-                color: isActive ? "var(--accent)" : "var(--placeholder)",
-                transition: "color 0.2s, background 0.2s",
-                WebkitTapHighlightColor: "transparent",
-              }}
-            >
-              {/* Icon */}
-              <span
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+            maxWidth: "440px",
+            margin: "0 auto",
+          }}
+        >
+          {TABS.map((tab) => {
+            const isActive = tab.id === activeTab;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => onTabChange(tab.id)}
+                role="tab"
+                aria-selected={isActive}
+                aria-label={`${tab.label} — ${tab.arabicLabel}`}
                 style={{
-                  transition: "transform 0.2s",
-                  transform: isActive ? "translateY(-1px)" : "translateY(0)",
                   display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "3px",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: "6px 12px",
+                  borderRadius: "12px",
+                  minWidth: "60px",
+                  minHeight: "44px",
+                  justifyContent: "center",
+                  color: isActive ? "var(--gold)" : "var(--placeholder)",
+                  filter: isActive ? "drop-shadow(0 0 5px color-mix(in srgb, var(--gold) 45%, transparent))" : "none",
+                  transition: "color 0.2s, background 0.2s, filter 0.2s",
+                  WebkitTapHighlightColor: "transparent",
                 }}
               >
-                {tab.icon}
-              </span>
-
-              {/* Label */}
-              <span
-                style={{
-                  fontFamily: "var(--font-lato)",
-                  fontSize: "0.58rem",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  fontWeight: isActive ? 400 : 300,
-                  lineHeight: 1,
-                  transition: "opacity 0.2s",
-                }}
-              >
-                {tab.label}
-              </span>
-
-              {/* Active dot */}
-              {isActive && (
+                <span style={{ transition: "transform 0.2s", transform: isActive ? "translateY(-1px)" : "translateY(0)", display: "flex" }}>
+                  {tab.icon}
+                </span>
                 <span
-                  aria-hidden="true"
                   style={{
-                    position: "absolute",
-                    bottom: "6px",
-                    width: "4px",
-                    height: "4px",
-                    borderRadius: "50%",
-                    background: "var(--accent)",
-                    opacity: 0.7,
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.58rem",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    fontWeight: isActive ? 400 : 300,
+                    lineHeight: 1,
+                    transition: "opacity 0.2s",
                   }}
-                />
-              )}
-            </button>
-          );
-        })}
-      </div>
-    </nav>
+                >
+                  {tab.label}
+                </span>
+                {isActive && (
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      position: "absolute",
+                      bottom: "6px",
+                      width: "4px",
+                      height: "4px",
+                      borderRadius: "50%",
+                      background: "var(--gold)",
+                      opacity: 0.85,
+                      boxShadow: "0 0 6px color-mix(in srgb, var(--gold) 60%, transparent)",
+                    }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </nav>
+
+      {/* ── Desktop top bar (hidden below md) ── */}
+      <nav
+        aria-label="Main navigation"
+        className="bottom-nav-blur hidden md:flex"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          background: "color-mix(in srgb, var(--background) 85%, transparent)",
+          borderBottom: "1px solid color-mix(in srgb, var(--gold) 12%, var(--divider))",
+          padding: "0 32px",
+          height: "56px",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        {/* Brand wordmark */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <span
+            style={{
+              fontFamily: "var(--font-amiri), serif",
+              fontSize: "1.3rem",
+              color: "var(--gold)",
+              direction: "rtl",
+              lineHeight: 1,
+            }}
+            aria-hidden="true"
+          >
+            أُمَّة
+          </span>
+          <span
+            style={{
+              fontFamily: "var(--font-playfair)",
+              fontSize: "0.72rem",
+              letterSpacing: "0.28em",
+              textTransform: "uppercase",
+              color: "var(--foreground)",
+              fontWeight: 400,
+              opacity: 0.75,
+            }}
+          >
+            Ummah Speaks
+          </span>
+        </div>
+
+        {/* Tab buttons */}
+        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+          {TABS.map((tab) => {
+            const isActive = tab.id === activeTab;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => onTabChange(tab.id)}
+                role="tab"
+                aria-selected={isActive}
+                aria-label={`${tab.label} — ${tab.arabicLabel}`}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "7px",
+                  background: isActive
+                    ? "color-mix(in srgb, var(--gold) 10%, transparent)"
+                    : "none",
+                  border: isActive
+                    ? "1px solid color-mix(in srgb, var(--gold) 25%, transparent)"
+                    : "1px solid transparent",
+                  borderRadius: "999px",
+                  cursor: "pointer",
+                  padding: "6px 16px",
+                  color: isActive ? "var(--gold)" : "var(--placeholder)",
+                  filter: isActive ? "drop-shadow(0 0 4px color-mix(in srgb, var(--gold) 35%, transparent))" : "none",
+                  transition: "color 0.2s, background 0.2s, border-color 0.2s, filter 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) e.currentTarget.style.color = "var(--foreground)";
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) e.currentTarget.style.color = "var(--placeholder)";
+                }}
+              >
+                <span style={{ display: "flex", flexShrink: 0 }}>{tab.icon}</span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    fontWeight: isActive ? 500 : 300,
+                  }}
+                >
+                  {tab.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </nav>
+    </>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { getEntries, clearEntries, formatRelativeTime, type JournalEntry } from "../lib/journal";
+import { BackButton, CompactBrand } from "./ui";
 
 interface JournalProps {
   onBack: () => void;
@@ -39,7 +40,7 @@ function EmptyState() {
         </p>
         <p
           style={{
-            fontFamily: "var(--font-lato)",
+            fontFamily: "var(--font-body)",
             fontSize: "0.82rem",
             fontWeight: 300,
             color: "var(--muted)",
@@ -98,7 +99,7 @@ function EntryCard({ entry }: { entry: JournalEntry }) {
             </span>
             <span
               style={{
-                fontFamily: "var(--font-lato)",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.65rem",
                 letterSpacing: "0.14em",
                 color: "var(--placeholder)",
@@ -138,7 +139,7 @@ function EntryCard({ entry }: { entry: JournalEntry }) {
         {/* Reflection preview */}
         <p
           style={{
-            fontFamily: "var(--font-lato)",
+            fontFamily: "var(--font-body)",
             fontSize: "0.85rem",
             fontWeight: 300,
             color: "var(--foreground)",
@@ -168,7 +169,7 @@ function EntryCard({ entry }: { entry: JournalEntry }) {
           >
             <span
               style={{
-                fontFamily: "var(--font-lato)",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.6rem",
                 letterSpacing: "0.26em",
                 textTransform: "uppercase",
@@ -179,7 +180,7 @@ function EntryCard({ entry }: { entry: JournalEntry }) {
             </span>
             <blockquote
               style={{
-                fontFamily: "var(--font-lato)",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.82rem",
                 fontWeight: 300,
                 lineHeight: 1.75,
@@ -194,7 +195,7 @@ function EntryCard({ entry }: { entry: JournalEntry }) {
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "8px" }}>
               <span
                 style={{
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   fontSize: "0.62rem",
                   fontWeight: 500,
                   letterSpacing: "0.16em",
@@ -211,7 +212,7 @@ function EntryCard({ entry }: { entry: JournalEntry }) {
               {entry.hadith.hadithNumber != null && (
                 <span
                   style={{
-                    fontFamily: "var(--font-lato)",
+                    fontFamily: "var(--font-body)",
                     fontSize: "0.62rem",
                     color: "var(--muted)",
                     whiteSpace: "nowrap",
@@ -233,7 +234,7 @@ function EntryCard({ entry }: { entry: JournalEntry }) {
             >
               <span
                 style={{
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   fontSize: "0.6rem",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
@@ -246,7 +247,7 @@ function EntryCard({ entry }: { entry: JournalEntry }) {
               </span>
               <p
                 style={{
-                  fontFamily: "var(--font-lato)",
+                  fontFamily: "var(--font-body)",
                   fontSize: "0.8rem",
                   fontWeight: 300,
                   color: "var(--muted)",
@@ -297,36 +298,15 @@ export default function Journal({ onBack }: JournalProps) {
       style={{ paddingTop: "3rem" }}
       aria-label="Your reflection journal"
     >
+      {/* ── Fixed back button (mobile only — desktop uses top nav) ── */}
+      <BackButton onClick={onBack} />
+
       <div className="w-full max-w-xl flex flex-col gap-6 fade-slide-in">
 
         {/* Header */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
           {/* Brand logo */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
-            <span
-              className="brand-arabic"
-              aria-hidden="true"
-              style={{
-                fontFamily: "var(--font-amiri), 'Scheherazade New', serif",
-                fontSize: "2rem",
-                lineHeight: 1.1,
-                color: "var(--accent)",
-                direction: "rtl",
-              }}
-            >
-              أُمَّة
-            </span>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <span aria-hidden="true" style={{ display: "block", height: "1px", width: "44px", background: "var(--accent)", opacity: 0.5 }} />
-              <span
-                className="brand-wordmark"
-                style={{ fontFamily: "var(--font-lato)", fontSize: "0.7rem", letterSpacing: "0.28em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 500 }}
-              >
-                Ummah Speaks
-              </span>
-              <span aria-hidden="true" style={{ display: "block", height: "1px", width: "44px", background: "var(--accent)", opacity: 0.5 }} />
-            </div>
-          </div>
+          <CompactBrand />
 
           <h1
             style={{
@@ -343,7 +323,7 @@ export default function Journal({ onBack }: JournalProps) {
           </h1>
           <p
             style={{
-              fontFamily: "var(--font-lato)",
+              fontFamily: "var(--font-body)",
               fontSize: "0.72rem",
               fontWeight: 300,
               letterSpacing: "0.1em",
@@ -387,7 +367,7 @@ export default function Journal({ onBack }: JournalProps) {
               onClick={handleClear}
               aria-label={confirmClear ? "Tap again to confirm clear all" : "Clear all journal entries"}
               style={{
-                fontFamily: "var(--font-lato)",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.62rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
@@ -404,29 +384,6 @@ export default function Journal({ onBack }: JournalProps) {
           </div>
         )}
 
-        {/* Desktop back button */}
-        <div className="hidden md:flex justify-center pb-6">
-          <button
-            onClick={onBack}
-            aria-label="Return to main screen"
-            style={{
-              fontFamily: "var(--font-lato)",
-              fontSize: "0.62rem",
-              letterSpacing: "0.24em",
-              textTransform: "uppercase",
-              color: "var(--muted)",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "4px 0",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--foreground)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
-          >
-            ← Back
-          </button>
-        </div>
       </div>
     </main>
   );
