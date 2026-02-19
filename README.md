@@ -40,6 +40,7 @@ No accounts. No data sent to a server. Your reflections stay on your device.
 | **Share / Download** | Save your reflection card as an image or share via the native share sheet |
 | **PWA Ready** | Installable on iOS and Android like a native app |
 | **Fully Responsive** | Designed mobile-first; works beautifully from 320 px to wide desktop |
+| **Clean Dark Theme** | Plain solid dark neutral background (`#111111`) — no textures or gradients, easy on the eyes on any screen |
 
 ---
 

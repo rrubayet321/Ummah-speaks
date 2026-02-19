@@ -1,17 +1,16 @@
 @import "tailwindcss";
 
-/* ── Dark mode only ── */
 :root {
-  --background:   #0d1117;      /* deep near-black              */
-  --surface:      #131b1d;      /* deep teal-black card surface */
-  --foreground:   #f0e6d3;      /* warm cream-gold text         */
+  --background:   #111111;      /* clean dark neutral           */
+  --surface:      #1C1C1C;      /* slightly lighter dark cards  */
+  --foreground:   #E8E3DC;      /* soft warm white text         */
   --accent:       #52b788;      /* vibrant emerald              */
   --accent-soft:  #74c69d;      /* lighter emerald hover/caret  */
   --gold:         #d4a843;      /* luminous Islamic gold        */
   --gold-soft:    #e8c272;      /* soft gold for glows          */
-  --muted:        #9a8a72;      /* warm brown-muted             */
-  --divider:      #1e2a20;      /* deep subtle divider          */
-  --placeholder:  #4a5c50;      /* muted dark placeholder       */
+  --muted:        #8A8A8A;      /* neutral grey                 */
+  --divider:      #2A2A2A;      /* clean neutral dark divider   */
+  --placeholder:  #555555;      /* neutral grey placeholder     */
 }
 
 @theme inline {
@@ -77,28 +76,6 @@ textarea::placeholder {
 
 textarea:focus {
   outline: none;
-}
-
-/* Subtle grain texture over the background */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  opacity: 0.6;
-}
-
-/* Radial vignette — darkens edges, draws eye to centre content */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(ellipse at center, transparent 38%, rgba(0, 0, 0, 0.48) 100%);
 }
 
 main {
@@ -178,18 +155,6 @@ main {
 .arabesque-bg {
   position: relative;
   overflow: hidden;
-}
-
-.arabesque-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5L33.8 24.2L51 18L39.5 32.5L54 39L35.8 36.2L30 55L24.2 36.2L6 39L20.5 32.5L9 18L26.2 24.2Z' fill='none' stroke='%23d4a843' stroke-width='0.55'/%3E%3Ccircle cx='30' cy='30' r='3.5' fill='none' stroke='%23d4a843' stroke-width='0.5'/%3E%3Ccircle cx='30' cy='30' r='1.2' fill='%23d4a843' opacity='0.4'/%3E%3C/svg%3E");
-  background-size: 60px 60px;
-  background-repeat: repeat;
-  opacity: 0.055;
 }
 
 /* ── Brand logo spring scale-in ── */
