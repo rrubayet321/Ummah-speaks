@@ -1,26 +1,293 @@
 @import "tailwindcss";
 
+/* ── Light mode ── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f0e8;        /* warm parchment beige        */
+  --surface:    #ede8de;        /* slightly deeper for contrast */
+  --foreground: #1c2b1e;        /* deep forest, almost black    */
+  --accent:     #2d5a3d;        /* rich dark green              */
+  --accent-soft:#4a7c59;        /* lighter green for hover/caret*/
+  --muted:      #6b7c6e;        /* muted sage                   */
+  --divider:    #d4ccbb;        /* soft beige divider           */
+  --placeholder:#a8b5a3;        /* sage-tinted placeholder      */
+}
+
+/* ── Dark mode ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #121a13;
+    --surface:    #1a241b;
+    --foreground: #e8e2d4;
+    --accent:     #7bb893;
+    --accent-soft:#9fd1ae;
+    --muted:      #7a9480;
+    --divider:    #2a3a2c;
+    --placeholder:#3d5240;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-playfair);
+  --font-body:    var(--font-lato);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+/* Screen-reader only — visually hidden but accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Visible focus ring for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-lato), "Helvetica Neue", sans-serif;
+}
+
+textarea::placeholder {
+  color: var(--placeholder);
+  font-style: italic;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+/* Subtle grain texture over the background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 0.6;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-slide-in {
+  animation: fadeSlideIn 0.9s ease forwards;
+}
+
+/* ── Brand glow animations ── */
+@keyframes arabicGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 10px color-mix(in srgb, var(--accent) 45%, transparent),
+      0 0 24px color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+  50% {
+    text-shadow:
+      0 0 16px color-mix(in srgb, var(--accent) 65%, transparent),
+      0 0 36px color-mix(in srgb, var(--accent) 32%, transparent);
+  }
+}
+
+@keyframes wordmarkGlow {
+  0%, 100% {
+    text-shadow: 0 0 8px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  50% {
+    text-shadow: 0 0 14px color-mix(in srgb, var(--accent) 50%, transparent);
+  }
+}
+
+.brand-arabic {
+  animation: arabicGlow 4s ease-in-out infinite;
+}
+
+.brand-wordmark {
+  animation: wordmarkGlow 4s ease-in-out infinite;
+}
+
+/* ── Sheikh / Learn to Pray card glow ── */
+@keyframes sheikCardPulse {
+  0%, 100% {
+    box-shadow:
+      0 4px 20px color-mix(in srgb, var(--accent) 18%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 6px 32px color-mix(in srgb, var(--accent) 30%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+}
+
+.sheikh-card {
+  animation: sheikCardPulse 4s ease-in-out infinite;
+}
+
+/* ── Islamic geometric arabesque background ── */
+.arabesque-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.arabesque-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5L33.8 24.2L51 18L39.5 32.5L54 39L35.8 36.2L30 55L24.2 36.2L6 39L20.5 32.5L9 18L26.2 24.2Z' fill='none' stroke='%232d5a3d' stroke-width='0.55'/%3E%3Ccircle cx='30' cy='30' r='3.5' fill='none' stroke='%232d5a3d' stroke-width='0.5'/%3E%3Ccircle cx='30' cy='30' r='1.2' fill='%232d5a3d' opacity='0.4'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+  background-repeat: repeat;
+  opacity: 0.045;
+}
+
+/* ── Brand logo spring scale-in ── */
+@keyframes brandScaleIn {
+  0%   { opacity: 0; transform: scale(0.55); }
+  65%  { transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.brand-scale-in {
+  animation: brandScaleIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ── Streaming calligrapher cursor ── */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.streaming-cursor::after {
+  content: "▎";
+  animation: cursorBlink 0.85s ease-in-out infinite;
+  color: var(--accent-soft);
+  font-weight: 300;
+  margin-left: 2px;
+  font-style: normal;
+}
+
+/* ── Mihrab arch frame (reflection container) ── */
+.mihrab-frame {
+  border-radius: 120px 120px 16px 16px / 44px 44px 16px 16px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Manuscript double-border card (hadith) ── */
+.manuscript-card {
+  position: relative;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  box-shadow: 0 2px 28px rgba(45, 90, 61, 0.08);
+  overflow: hidden;
+}
+
+.manuscript-card::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 15px;
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Begin button active glow ── */
+@keyframes beginGlow {
+  0%, 100% { box-shadow: 0 0 0 0   color-mix(in srgb, var(--accent) 0%,  transparent); }
+  50%       { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent),
+                          0 4px 16px color-mix(in srgb, var(--accent) 12%, transparent); }
+}
+
+.begin-btn-active {
+  animation: beginGlow 2.8s ease-in-out infinite;
+}
+
+/* ── Tasbeeh tap feedback ── */
+@keyframes tasbeehPulse {
+  0%   { transform: scale(1);    }
+  40%  { transform: scale(0.95); }
+  100% { transform: scale(1);    }
+}
+
+.tasbeeh-tap {
+  animation: tasbeehPulse 0.18s ease-out;
+}
+
+/* ── Tasbeeh complete flash ── */
+@keyframes completeFlash {
+  0%   { background: var(--surface); }
+  40%  { background: color-mix(in srgb, var(--accent) 15%, var(--surface)); }
+  100% { background: var(--surface); }
+}
+
+.tasbeeh-complete {
+  animation: completeFlash 0.5s ease-out;
+}
+
+/* ── Bottom navigation blur background ── */
+.bottom-nav-blur {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ── Journal card expand transition ── */
+.journal-card {
+  transition: box-shadow 0.2s ease;
+}
+
+.journal-card:hover {
+  box-shadow: 0 4px 20px rgba(45, 90, 61, 0.1);
+}
+
+/* ── Mobile bottom padding for BottomNav ── */
+.has-bottom-nav {
+  padding-bottom: 5.5rem;
+}
+
+@media (min-width: 768px) {
+  .has-bottom-nav {
+    padding-bottom: 0;
+  }
 }

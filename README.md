@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ummah Speaks
 
-## Getting Started
+A quiet Islamic web app where you can share how you're feeling and receive personalised hadith guidance, reflections, prayer times, and dhikr.
 
-First, run the development server:
+Built with love for the Ummah. 🕌
+
+---
+
+## Features
+
+- **Mood & Feelings** — Type how you feel and receive a relevant hadith with a personal AI-written reflection
+- **Salah Timings** — Accurate daily prayer times based on your location (powered by the Adhan library)
+- **Tasbeeh / Dhikr** — A digital counter for your remembrance of Allah
+- **Journal** — Write and save your personal reflections locally
+- **Islamic Date** — Displays the current Hijri date
+- **PWA Ready** — Can be installed on your phone like a native app
+
+---
+
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| [Next.js 16](https://nextjs.org) | React framework (frontend + backend API routes) |
+| [TypeScript](https://typescriptlang.org) | Type-safe JavaScript |
+| [Tailwind CSS 4](https://tailwindcss.com) | Styling |
+| [Groq API](https://console.groq.com) | AI-powered personal reflections (fast LLM) |
+| [Google Generative AI](https://ai.google.dev) | Additional AI capabilities |
+| [Adhan](https://github.com/batoulapps/adhan-js) | Islamic prayer time calculations |
+| [Hadith API](https://hadithapi.pages.dev) | Fetching hadiths |
+| [html2canvas](https://html2canvas.hertzen.com) | Save/share reflections as images |
+
+---
+
+## Running Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/rrubayet321/Ummah-speaks.git
+cd Ummah-speaks
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file in the root folder (copy from `.env.example`):
+
+```bash
+cp .env.example .env.local
+```
+
+Then open `.env.local` and fill in your real API key:
+
+```
+GROQ_API_KEY=your_actual_key_here
+```
+
+You can get a free Groq API key at [https://console.groq.com](https://console.groq.com).
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+| Variable | Description | Where to get it |
+|---|---|---|
+| `GROQ_API_KEY` | API key for Groq's AI model (used for generating personal reflections) | [console.groq.com](https://console.groq.com) |
 
-To learn more about Next.js, take a look at the following resources:
+> ⚠️ Never commit your `.env.local` file to GitHub. It is already in `.gitignore`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+The easiest way to deploy is with [Vercel](https://vercel.com) (free tier available):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com) and import your GitHub repo
+3. Add your `GROQ_API_KEY` under **Environment Variables** in the Vercel dashboard
+4. Click **Deploy** — your app will be live with a public URL
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Licence
+
+This project is open source and free to use.

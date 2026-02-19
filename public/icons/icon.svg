@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#f5f0e8"/>
+
+  <!-- Outer decorative ring -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#d4ccbb" stroke-width="2"/>
+
+  <!-- 8-pointed Islamic star -->
+  <path d="M256 80
+    L278 178 L370 140
+    L332 232 L430 254
+    L332 276 L370 368
+    L278 330 L256 428
+    L234 330 L142 368
+    L180 276 L82 254
+    L180 232 L142 140
+    L234 178 Z"
+    fill="none" stroke="#2d5a3d" stroke-width="6" stroke-linejoin="round"/>
+
+  <!-- Inner star -->
+  <path d="M256 148
+    L269 210 L326 192
+    L302 244 L360 254
+    L302 264 L326 316
+    L269 298 L256 360
+    L243 298 L186 316
+    L210 264 L152 254
+    L210 244 L186 192
+    L243 210 Z"
+    fill="#2d5a3d" opacity="0.15"/>
+
+  <!-- Arabic #OENQ) text -->
+  <text
+    x="256"
+    y="272"
+    text-anchor="middle"
+    font-family="Georgia, serif"
+    font-size="80"
+    fill="#2d5a3d"
+    opacity="0.9"
+  >#OENQ)</text>
+
+  <!-- Wordmark -->
+  <text
+    x="256"
+    y="320"
+    text-anchor="middle"
+    font-family="Georgia, serif"
+    font-size="22"
+    letter-spacing="6"
+    fill="#2d5a3d"
+    opacity="0.55"
+  >UMMAH</text>
+</svg>
