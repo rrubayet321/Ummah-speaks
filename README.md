@@ -163,7 +163,18 @@ Your app will be live at a `*.vercel.app` URL within seconds.
 
 ## Licence
 
-This project is open source. Feel free to fork, adapt, and use it for your own Islamic projects.
+MIT © [Rubayet Hassan](mailto:rrubayet321@gmail.com)
+
+This project is open source under the MIT License. You are free to fork, adapt, and build upon it for your own Islamic projects — just keep the copyright notice intact.
+
+---
+
+## Author
+
+Built by **Rubayet Hassan**
+
+- Email: [rrubayet321@gmail.com](mailto:rrubayet321@gmail.com)
+- GitHub: [@rrubayet321](https://github.com/rrubayet321)
 
 ---
 

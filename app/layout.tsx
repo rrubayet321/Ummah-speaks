@@ -38,6 +38,7 @@ export const metadata: Metadata = {
   title: "Ummah Speaks",
   description: "A quiet Islamic space to share how you feel — receive hadith guidance, personal reflections, prayer times and dhikr.",
   manifest: "/manifest.json",
+  authors: [{ name: "Rubayet Hassan", url: "mailto:rrubayet321@gmail.com" }],
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -63,6 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="author" content="Rubayet Hassan" />
         {/* Preconnect to Hadith API for faster first fetch */}
         <link rel="preconnect" href="https://hadithapi.pages.dev" />
         {/* PWA icon references */}

@@ -2,6 +2,10 @@
   "name": "ummah-speaks",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Rubayet Hassan",
+    "email": "rrubayet321@gmail.com"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
