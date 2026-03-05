@@ -84,7 +84,7 @@ function AccentBar() {
         height: "2px",
         width: "100%",
         borderRadius: "2px 2px 0 0",
-        background: "linear-gradient(to right, var(--accent), var(--accent-soft), transparent)",
+        background: "var(--accent)",
       }}
     />
   );
@@ -97,8 +97,8 @@ function SectionDivider({ label }: { label: string }) {
       <span
         style={{
           fontFamily: "var(--font-body)",
-          fontSize: "0.58rem",
-          letterSpacing: "0.28em",
+          fontSize: "0.72rem",
+          letterSpacing: "0.22em",
           textTransform: "uppercase",
           color: "var(--placeholder)",
           whiteSpace: "nowrap",
@@ -251,8 +251,8 @@ function CityCarousel({
         style={{
           textAlign: "center",
           fontFamily: "var(--font-body)",
-          fontSize: "0.62rem",
-          letterSpacing: "0.26em",
+          fontSize: "0.72rem",
+          letterSpacing: "0.22em",
           textTransform: "uppercase",
           color: "var(--placeholder)",
           margin: 0,
@@ -455,7 +455,7 @@ function PrayerRow({
       <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
         <span style={{
           fontFamily: "var(--font-cormorant)",
-          fontSize: "clamp(1.1rem, 3.5vw, 1.3rem)",
+          fontSize: "clamp(1.3rem, 4vw, 1.55rem)",
           fontWeight: 500,
           letterSpacing: "0.03em",
           color: isNext ? "var(--background)" : "var(--foreground)",
@@ -467,7 +467,7 @@ function PrayerRow({
           aria-hidden="true"
           style={{
             fontFamily: "var(--font-cormorant)",
-            fontSize: "0.92rem",
+            fontSize: "1.05rem",
             fontStyle: "italic",
             color: isNext ? "rgba(255,255,255,0.6)" : "var(--muted)",
             lineHeight: 1,
@@ -485,7 +485,7 @@ function PrayerRow({
           style={{
             fontFamily: "var(--font-body)",
             fontWeight: 300,
-            fontSize: "clamp(0.95rem, 3vw, 1.1rem)",
+            fontSize: "clamp(1.1rem, 3.5vw, 1.3rem)",
             letterSpacing: "0.04em",
             color: isNext ? "var(--background)" : "var(--foreground)",
             fontVariantNumeric: "tabular-nums",
@@ -497,8 +497,8 @@ function PrayerRow({
         {isNext && (
           <span aria-hidden="true" style={{
             fontFamily: "var(--font-body)",
-            fontSize: "0.56rem",
-            letterSpacing: "0.24em",
+            fontSize: "0.68rem",
+            letterSpacing: "0.22em",
             textTransform: "uppercase",
             color: "rgba(255,255,255,0.65)",
           }}>
@@ -508,8 +508,8 @@ function PrayerRow({
         {isCurrent && (
           <span aria-hidden="true" style={{
             fontFamily: "var(--font-body)",
-            fontSize: "0.56rem",
-            letterSpacing: "0.24em",
+            fontSize: "0.68rem",
+            letterSpacing: "0.22em",
             textTransform: "uppercase",
             color: "var(--accent-soft)",
           }}>
@@ -765,7 +765,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "18px", paddingTop: "4px" }}>
           <p style={{
             fontFamily: "var(--font-body)",
-            fontSize: "0.62rem",
+            fontSize: "0.72rem",
             letterSpacing: "0.12em",
             color: "var(--placeholder)",
             margin: 0,
@@ -774,6 +774,62 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
           </p>
 
           <div aria-hidden="true" style={{ width: "100%", height: "1px", background: "var(--divider)" }} />
+
+          {/* ── Annotation callout + Sheikh card ── */}
+          <div style={{ position: "relative", width: "100%", paddingTop: "52px" }}>
+
+            {/* Arrow callout — "in case you don't know how to pray" */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                top: "-10px",
+                right: "18px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                gap: "2px",
+                transform: "rotate(-4deg)",
+                pointerEvents: "none",
+                zIndex: 2,
+              }}
+            >
+              <span style={{
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "0.88rem",
+                fontStyle: "italic",
+                color: "var(--gold)",
+                opacity: 0.85,
+                whiteSpace: "nowrap",
+                lineHeight: 1.3,
+              }}>
+                in case you don&apos;t know how to pray
+              </span>
+              {/* Curved SVG arrow pointing down-left toward the card */}
+              <svg
+                width="54"
+                height="38"
+                viewBox="0 0 54 38"
+                fill="none"
+                style={{ marginRight: "12px" }}
+              >
+                <path
+                  d="M50 2 C42 2, 10 6, 4 30"
+                  stroke="var(--gold)"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  opacity="0.75"
+                />
+                {/* Arrowhead */}
+                <path
+                  d="M4 30 L10 24 M4 30 L12 32"
+                  stroke="var(--gold)"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  opacity="0.75"
+                />
+              </svg>
+            </div>
 
           {/* ── Sheikh Assim Al Hakim — Learn to Pray card ── */}
           <a
@@ -799,11 +855,11 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
             onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.opacity = "0.92"; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.opacity = "1"; }}
           >
-            {/* Accent gradient top bar */}
+            {/* Accent top bar */}
             <div aria-hidden="true" style={{
               height: "3px",
               width: "100%",
-              background: "linear-gradient(to right, var(--accent), var(--accent-soft), transparent)",
+              background: "var(--accent)",
             }} />
 
             <div style={{ padding: "0 22px 22px", display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -811,8 +867,8 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
               <div aria-hidden="true" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <span style={{
                   fontFamily: "var(--font-body)",
-                  fontSize: "0.58rem",
-                  letterSpacing: "0.28em",
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.22em",
                   textTransform: "uppercase",
                   color: "var(--accent)",
                   opacity: 0.75,
@@ -825,7 +881,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
               {/* Main call-to-action */}
               <p style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(1.2rem, 4vw, 1.5rem)",
+                fontSize: "clamp(1.45rem, 4.5vw, 1.8rem)",
                 fontWeight: 500,
                 fontStyle: "italic",
                 color: "var(--foreground)",
@@ -838,7 +894,7 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
               {/* Sheikh attribution */}
               <p style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "0.75rem",
+                fontSize: "0.88rem",
                 fontWeight: 300,
                 color: "var(--muted)",
                 margin: 0,
@@ -875,8 +931,8 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
                 </span>
                 <span style={{
                   fontFamily: "var(--font-body)",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.2em",
+                  fontSize: "0.78rem",
+                  letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   color: "var(--accent)",
                   fontWeight: 400,
@@ -895,6 +951,8 @@ export default function SalahTimings({ onBack }: { onBack: () => void }) {
               </div>
             </div>
           </a>
+
+          </div>{/* end annotation wrapper */}
 
         </div>
 

@@ -255,9 +255,9 @@ export default function Tasbeeh({ onBack }: TasbeehProps) {
                 inset: "14px",
                 borderRadius: "50%",
                 background: allComplete
-                  ? "color-mix(in srgb, var(--gold) 14%, var(--surface))"
+                  ? "var(--surface-2)"
                   : phaseComplete
-                  ? "color-mix(in srgb, var(--gold) 10%, var(--surface))"
+                  ? "var(--surface-2)"
                   : "var(--surface)",
                 border: "none",
                 cursor: allComplete ? "default" : "pointer",

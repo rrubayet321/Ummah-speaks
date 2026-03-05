@@ -1,6 +1,6 @@
 "use client";
 
-export type NavTab = "reflect" | "salah" | "tasbeeh" | "journal";
+export type NavTab = "reflect" | "salah" | "tasbeeh" | "journal" | "dua";
 
 interface BottomNavProps {
   activeTab: NavTab;
@@ -38,6 +38,37 @@ const TABS: TabConfig[] = [
     ),
   },
   {
+    id: "dua",
+    label: "Du'a",
+    arabicLabel: "دعاء",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        {/* Open hands / supplication gesture */}
+        <path
+          d="M5 14 C5 11 6.5 9 8 8.5"
+          stroke="currentColor"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+        />
+        <path
+          d="M15 14 C15 11 13.5 9 12 8.5"
+          stroke="currentColor"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+        />
+        <path
+          d="M7 8 C7 5.5 8.5 4.5 10 4.5 C11.5 4.5 13 5.5 13 8"
+          stroke="currentColor"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          fill="none"
+        />
+        <circle cx="10" cy="16" r="1.2" fill="currentColor" opacity="0.7" />
+        <path d="M8 14.8 C8.5 15.5 9 16 10 16 C11 16 11.5 15.5 12 14.8" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" fill="none" />
+      </svg>
+    ),
+  },
+  {
     id: "salah",
     label: "Salah",
     arabicLabel: "الصلاة",
@@ -59,7 +90,6 @@ const TABS: TabConfig[] = [
     arabicLabel: "تسبيح",
     icon: (
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-        {/* Prayer beads circle */}
         <circle cx="10" cy="10" r="6.5" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 2.2" />
         <circle cx="10" cy="3.5" r="1.3" fill="currentColor" opacity="0.8" />
         <line x1="10" y1="1" x2="10" y2="3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
@@ -93,9 +123,9 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
           left: 0,
           right: 0,
           zIndex: 50,
-          background: "color-mix(in srgb, var(--background) 88%, transparent)",
-          borderTop: "1px solid color-mix(in srgb, var(--gold) 15%, var(--divider))",
-          padding: "8px 12px calc(8px + env(safe-area-inset-bottom))",
+          background: "var(--background)",
+          borderTop: "1px solid var(--divider)",
+          padding: "6px 4px calc(6px + env(safe-area-inset-bottom))",
         }}
       >
         <div
@@ -103,7 +133,7 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
             display: "flex",
             justifyContent: "space-around",
             alignItems: "center",
-            maxWidth: "440px",
+            maxWidth: "500px",
             margin: "0 auto",
           }}
         >
@@ -120,33 +150,41 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "3px",
+                  gap: "4px",
                   background: "none",
                   border: "none",
                   cursor: "pointer",
-                  padding: "6px 12px",
+                  padding: "8px 10px",
                   borderRadius: "12px",
-                  minWidth: "60px",
+                  minWidth: "52px",
                   minHeight: "44px",
                   justifyContent: "center",
                   color: isActive ? "var(--gold)" : "var(--placeholder)",
-                  filter: isActive ? "drop-shadow(0 0 5px color-mix(in srgb, var(--gold) 45%, transparent))" : "none",
-                  transition: "color 0.2s, background 0.2s, filter 0.2s",
+                  transition: "color 0.25s",
                   WebkitTapHighlightColor: "transparent",
+                  position: "relative",
                 }}
               >
-                <span style={{ transition: "transform 0.2s", transform: isActive ? "translateY(-1px)" : "translateY(0)", display: "flex" }}>
+                <span
+                  style={{
+                    display: "flex",
+                    transition: "transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                    transform: isActive ? "translateY(-1px) scale(1.05)" : "translateY(0) scale(1)",
+                    opacity: isActive ? 1 : 0.55,
+                  }}
+                >
                   {tab.icon}
                 </span>
                 <span
                   style={{
                     fontFamily: "var(--font-body)",
                     fontSize: "0.58rem",
-                    letterSpacing: "0.1em",
+                    letterSpacing: "0.08em",
                     textTransform: "uppercase",
-                    fontWeight: isActive ? 400 : 300,
+                    fontWeight: isActive ? 500 : 400,
                     lineHeight: 1,
-                    transition: "opacity 0.2s",
+                    opacity: isActive ? 1 : 0.55,
+                    transition: "opacity 0.25s",
                   }}
                 >
                   {tab.label}
@@ -156,13 +194,12 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
                     aria-hidden="true"
                     style={{
                       position: "absolute",
-                      bottom: "6px",
-                      width: "4px",
-                      height: "4px",
+                      bottom: "3px",
+                      width: "3px",
+                      height: "3px",
                       borderRadius: "50%",
                       background: "var(--gold)",
-                      opacity: 0.85,
-                      boxShadow: "0 0 6px color-mix(in srgb, var(--gold) 60%, transparent)",
+                      opacity: 0.9,
                     }}
                   />
                 )}
@@ -182,36 +219,31 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
           left: 0,
           right: 0,
           zIndex: 50,
-          background: "color-mix(in srgb, var(--background) 85%, transparent)",
-          borderBottom: "1px solid color-mix(in srgb, var(--gold) 12%, var(--divider))",
+          background: "var(--background)",
+          borderBottom: "1px solid var(--divider)",
           padding: "0 32px",
-          height: "56px",
+          height: "54px",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
-        {/* Brand wordmark */}
+        {/* Brand */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <span
-            style={{
-              fontFamily: "var(--font-amiri), serif",
-              fontSize: "1.3rem",
-              color: "var(--gold)",
-              direction: "rtl",
-              lineHeight: 1,
-            }}
+            style={{ fontFamily: "var(--font-amiri), serif", fontSize: "1.3rem", color: "var(--foreground)", direction: "rtl", lineHeight: 1 }}
             aria-hidden="true"
           >
             أُمَّة
           </span>
+          <span aria-hidden="true" style={{ display: "block", height: "14px", width: "2px", background: "var(--accent)", borderRadius: "2px" }} />
           <span
             style={{
-              fontFamily: "var(--font-playfair)",
-              fontSize: "0.72rem",
-              letterSpacing: "0.28em",
+              fontFamily: "var(--font-body)",
+              fontSize: "0.68rem",
+              letterSpacing: "0.24em",
               textTransform: "uppercase",
               color: "var(--foreground)",
-              fontWeight: 400,
+              fontWeight: 500,
               opacity: 0.75,
             }}
           >
@@ -220,7 +252,7 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
         </div>
 
         {/* Tab buttons */}
-        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "2px" }}>
           {TABS.map((tab) => {
             const isActive = tab.id === activeTab;
             return (
@@ -233,35 +265,27 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "7px",
-                  background: isActive
-                    ? "color-mix(in srgb, var(--gold) 10%, transparent)"
-                    : "none",
-                  border: isActive
-                    ? "1px solid color-mix(in srgb, var(--gold) 25%, transparent)"
-                    : "1px solid transparent",
+                  gap: "6px",
+                  background: isActive ? "var(--surface-2)" : "none",
+                  border: isActive ? "1px solid var(--divider)" : "1px solid transparent",
                   borderRadius: "999px",
                   cursor: "pointer",
-                  padding: "6px 16px",
+                  padding: "6px 14px",
                   color: isActive ? "var(--gold)" : "var(--placeholder)",
-                  filter: isActive ? "drop-shadow(0 0 4px color-mix(in srgb, var(--gold) 35%, transparent))" : "none",
-                  transition: "color 0.2s, background 0.2s, border-color 0.2s, filter 0.2s",
+                  transition: "color 0.2s, background 0.2s, border-color 0.2s",
+                  opacity: isActive ? 1 : 0.6,
                 }}
-                onMouseEnter={(e) => {
-                  if (!isActive) e.currentTarget.style.color = "var(--foreground)";
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) e.currentTarget.style.color = "var(--placeholder)";
-                }}
+                onMouseEnter={(e) => { if (!isActive) { e.currentTarget.style.opacity = "1"; e.currentTarget.style.color = "var(--muted)"; } }}
+                onMouseLeave={(e) => { if (!isActive) { e.currentTarget.style.opacity = "0.6"; e.currentTarget.style.color = "var(--placeholder)"; } }}
               >
                 <span style={{ display: "flex", flexShrink: 0 }}>{tab.icon}</span>
                 <span
                   style={{
                     fontFamily: "var(--font-body)",
-                    fontSize: "0.65rem",
-                    letterSpacing: "0.14em",
+                    fontSize: "0.68rem",
+                    letterSpacing: "0.1em",
                     textTransform: "uppercase",
-                    fontWeight: isActive ? 500 : 300,
+                    fontWeight: isActive ? 500 : 400,
                   }}
                 >
                   {tab.label}

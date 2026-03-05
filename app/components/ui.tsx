@@ -17,13 +17,11 @@ export function BackButton({ onClick }: { onClick: () => void }) {
         gap: "6px",
         fontFamily: "var(--font-body)",
         fontSize: "0.72rem",
-        letterSpacing: "0.18em",
+        letterSpacing: "0.14em",
         textTransform: "uppercase",
         color: "var(--muted)",
-        background: "color-mix(in srgb, var(--background) 80%, transparent)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        border: "1px solid color-mix(in srgb, var(--gold) 15%, var(--divider))",
+        background: "var(--background)",
+        border: "1px solid var(--divider)",
         borderRadius: "999px",
         padding: "7px 14px",
         minHeight: "44px",
@@ -31,12 +29,12 @@ export function BackButton({ onClick }: { onClick: () => void }) {
         transition: "color 0.2s, border-color 0.2s",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.color = "var(--gold)";
-        e.currentTarget.style.borderColor = "color-mix(in srgb, var(--gold) 40%, transparent)";
+        e.currentTarget.style.color = "var(--foreground)";
+        e.currentTarget.style.borderColor = "var(--muted)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.color = "var(--muted)";
-        e.currentTarget.style.borderColor = "color-mix(in srgb, var(--gold) 15%, var(--divider))";
+        e.currentTarget.style.borderColor = "var(--divider)";
       }}
     >
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -47,40 +45,40 @@ export function BackButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-/* ── CompactBrand ── accent-coloured mini brand shown on sub-pages */
+/* ── CompactBrand ── clean mini brand shown on sub-pages */
 export function CompactBrand() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
       <span
-        className="brand-arabic"
         aria-hidden="true"
         style={{
           fontFamily: "var(--font-amiri), 'Scheherazade New', serif",
           fontSize: "2rem",
           lineHeight: 1.1,
-          color: "var(--accent)",
+          color: "var(--foreground)",
           direction: "rtl",
+          fontWeight: 400,
         }}
       >
         أُمَّة
       </span>
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <span aria-hidden="true" style={{ display: "block", height: "1px", width: "44px", background: "var(--accent)", opacity: 0.5 }} />
-        <span
-          className="brand-wordmark"
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "0.7rem",
-            letterSpacing: "0.28em",
-            textTransform: "uppercase",
-            color: "var(--accent)",
-            fontWeight: 500,
-          }}
-        >
-          Ummah Speaks
-        </span>
-        <span aria-hidden="true" style={{ display: "block", height: "1px", width: "44px", background: "var(--accent)", opacity: 0.5 }} />
-      </div>
+      <span
+        aria-hidden="true"
+        style={{ display: "block", height: "2px", width: "24px", background: "var(--accent)", borderRadius: "2px" }}
+      />
+      <span
+        style={{
+          fontFamily: "var(--font-body)",
+          fontSize: "0.65rem",
+          letterSpacing: "0.28em",
+          textTransform: "uppercase",
+          color: "var(--foreground)",
+          fontWeight: 500,
+          opacity: 0.75,
+        }}
+      >
+        Ummah Speaks
+      </span>
     </div>
   );
 }
