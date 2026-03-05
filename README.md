@@ -38,7 +38,7 @@ No accounts. No tracking. Your reflections stay on your device.
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Description |
 |---|---|
@@ -46,21 +46,21 @@ No accounts. No tracking. Your reflections stay on your device.
 | **Context-Aware AI** | Reflections are enriched with the Qur'anic verse, Name of Allah, and keyword relevant to your input |
 | **Input Suggestions** | Rotating prompt chips help you discover what to type and get started quickly |
 | **Voice Input** | Record your feeling by voice — transcribed live via Groq Whisper |
-| **Du'a Refiner** | Paste a rough du'a and the app refines it into beautiful, heartfelt Arabic supplication |
+| **Du'a Refiner** | Paste a rough du'a and the app refines it into heartfelt Arabic supplication |
 | **Salah Times** | Accurate daily prayer times for 100+ cities, live clock and next-prayer countdown |
-| **Tasbeeh** | Digital dhikr counter — Subhanallah × 33, Alhamdulillah × 33, Allahu Akbar × 34 with haptic feedback |
+| **Tasbeeh** | Digital dhikr counter — Subhanallah x 33, Alhamdulillah x 33, Allahu Akbar x 34 with haptic feedback |
 | **Journal + Favourites** | Your last 10 reflections saved privately; star any entry to pin it to your Favourites |
 | **Islamic Date** | Hijri calendar date displayed on the reflect screen |
 | **Share / Download** | Save your reflection card as a PNG image or share via the native share sheet |
 | **PWA Ready** | Installable on iOS and Android like a native app |
 | **Fully Responsive** | Mobile-first design; works beautifully from 320 px to wide desktop |
-| **Minimalist Dark Theme** | Pure solid dark neutral background (`#111111`) — no gradients or textures, easy on every screen |
+| **Minimalist Dark Theme** | Pure solid dark neutral background (`#111111`) — no gradients or textures |
 | **Rate Limiting** | API routes are protected with per-IP rate limiting to prevent abuse |
-| **Input Validation** | All API payloads validated with Zod schemas — SQL injection and prompt injection resistant |
+| **Input Validation** | All API payloads validated with Zod schemas — resistant to prompt injection |
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Technology | Role |
 |---|---|
@@ -79,7 +79,7 @@ No accounts. No tracking. Your reflections stay on your device.
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
 ### High-level overview
 
@@ -150,7 +150,7 @@ User types feeling
 |---|---|---|
 | Client state | React `useState` / `useEffect` | UI state, fetched results, input value |
 | Persistence | Browser `localStorage` | Journal entries (last 10), Favourites |
-| Server state | Next.js API Routes (stateless) | No DB — every request is independent |
+| Server state | Next.js API Routes (stateless) | No database — every request is independent |
 | Secrets | `.env.local` → Vercel env vars | `GROQ_API_KEY` only |
 
 ### Security model
@@ -164,7 +164,7 @@ User types feeling
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -206,7 +206,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🔐 Environment Variables
+## Environment Variables
 
 | Variable | Required | Description |
 |---|---|---|
@@ -216,7 +216,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ummah-speaks/
@@ -255,7 +255,7 @@ ummah-speaks/
 
 ---
 
-## 🌐 Deployment
+## Deployment
 
 Deploy in one click with [Vercel](https://vercel.com) (free tier):
 
@@ -268,7 +268,7 @@ Your app will be live at a `*.vercel.app` URL within seconds.
 
 ---
 
-## 🔒 Privacy
+## Privacy
 
 - All journal entries live in your browser's `localStorage` — they **never leave your device**.
 - The only data sent to an external server is the text you type (sent to Groq to generate a reflection). No account, no name, no identifiers are transmitted.
@@ -276,7 +276,7 @@ Your app will be live at a `*.vercel.app` URL within seconds.
 
 ---
 
-## 🗺 Roadmap
+## Roadmap
 
 - [ ] Offline support (Service Worker caching)
 - [ ] Multi-language reflections (Arabic, Urdu, Malay)
@@ -287,9 +287,9 @@ Your app will be live at a `*.vercel.app` URL within seconds.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome. Please open an issue first to discuss what you'd like to change, then fork the repo and submit a pull request.
+Contributions are welcome. Please open an issue first to discuss what you would like to change, then fork the repository and submit a pull request.
 
 ```bash
 # Fork → clone your fork
@@ -307,7 +307,7 @@ git push origin feat/your-feature-name
 
 ---
 
-## 📄 Licence
+## Licence
 
 MIT © [Rubayet Hassan](mailto:rrubayet321@gmail.com)
 
@@ -315,9 +315,9 @@ This project is open source under the MIT License. You are free to fork, adapt, 
 
 ---
 
-## 👤 Author
+## Author
 
-Built with love for the Ummah by **Rubayet Hassan**
+Built by **Rubayet Hassan**
 
 [![GitHub](https://img.shields.io/badge/GitHub-rrubayet321-181717?style=flat-square&logo=github)](https://github.com/rrubayet321)
 [![Email](https://img.shields.io/badge/Email-rrubayet321%40gmail.com-ea4335?style=flat-square&logo=gmail&logoColor=white)](mailto:rrubayet321@gmail.com)
