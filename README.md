@@ -1,15 +1,23 @@
 <div align="center">
 
+<br/>
+
 # أُمَّة · Ummah Speaks
 
-**A quiet Islamic companion for the heart.**
+### A quiet Islamic companion for the heart.
 
-Share how you are feeling and receive a relevant hadith, a personalised reflection, accurate prayer times, and a digital dhikr counter — all in one beautifully crafted app.
+Share how you are feeling and receive a relevant hadith, a personalised AI reflection,  
+accurate prayer times, and a digital dhikr counter — all in one beautifully crafted app.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=flat-square&logo=vercel)](https://ummah-speaks.vercel.app)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-38bdf8?style=flat-square&logo=tailwind-css)](https://tailwindcss.com)
+<br/>
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-ummah--speaks.vercel.app-10b981?style=for-the-badge&logo=vercel&logoColor=white)](https://ummah-speaks.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js-15-000000?style=for-the-badge&logo=next.js)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Groq](https://img.shields.io/badge/Groq-AI-f55036?style=for-the-badge)](https://console.groq.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
+
+<br/>
 
 </div>
 
@@ -17,55 +25,66 @@ Share how you are feeling and receive a relevant hadith, a personalised reflecti
 
 ## What is Ummah Speaks?
 
-Ummah Speaks is a personal Islamic web app that meets you where you are emotionally. You write a few words about how you feel — anxious, grateful, lost, hopeful — and the app:
+Ummah Speaks is a personal Islamic web app that meets you where you are emotionally. Write a few words about how you feel — anxious, grateful, lost, hopeful — and the app:
 
-1. Extracts the emotional theme using AI
-2. Finds a relevant hadith from the authenticated collections (Bukhari or Muslim)
-3. Writes a personalised reflection just for you
-4. Saves everything privately to your on-device journal
+1. **Understands your intent** — Are you expressing a feeling, seeking guidance, or asking for a du'a for someone?
+2. **Extracts the spiritual theme** using AI keyword analysis
+3. **Finds a relevant hadith** from authenticated collections (Bukhari or Muslim)
+4. **Fetches a matching Qur'anic verse** and the most relevant Name of Allah
+5. **Writes a personalised reflection** — different every time, shaped to your exact words
+6. **Saves everything privately** to your on-device journal
 
-No accounts. No data sent to a server. Your reflections stay on your device.
+No accounts. No tracking. Your reflections stay on your device.
 
 ---
 
-## Features
+## ✨ Features
 
 | Feature | Description |
 |---|---|
-| **Reflect** | Share your feelings and receive a relevant hadith + AI-written reflection |
-| **Salah Times** | Accurate daily prayer times for 100+ cities, with a live clock and next-prayer badge |
-| **Tasbeeh** | Digital dhikr counter guiding you through Subhanallah × 33, Alhamdulillah × 33, Allahu Akbar × 34 with haptic feedback |
-| **Journal** | Your last 10 reflections saved privately to localStorage — expandable with full hadith |
-| **Islamic Date** | Hijri date displayed in the reflect screen |
-| **Share / Download** | Save your reflection card as an image or share via the native share sheet |
+| **Reflect (3 Modes)** | Choose between _Feeling_, _Seeking Guidance_, or _Du'a for Someone_ — the AI adapts its response to your intent |
+| **Context-Aware AI** | Reflections are enriched with the Qur'anic verse, Name of Allah, and keyword relevant to your input |
+| **Input Suggestions** | Rotating prompt chips help you discover what to type and get started quickly |
+| **Voice Input** | Record your feeling by voice — transcribed live via Groq Whisper |
+| **Du'a Refiner** | Paste a rough du'a and the app refines it into beautiful, heartfelt Arabic supplication |
+| **Salah Times** | Accurate daily prayer times for 100+ cities, live clock and next-prayer countdown |
+| **Tasbeeh** | Digital dhikr counter — Subhanallah × 33, Alhamdulillah × 33, Allahu Akbar × 34 with haptic feedback |
+| **Journal + Favourites** | Your last 10 reflections saved privately; star any entry to pin it to your Favourites |
+| **Islamic Date** | Hijri calendar date displayed on the reflect screen |
+| **Share / Download** | Save your reflection card as a PNG image or share via the native share sheet |
 | **PWA Ready** | Installable on iOS and Android like a native app |
-| **Fully Responsive** | Designed mobile-first; works beautifully from 320 px to wide desktop |
-| **Clean Dark Theme** | Plain solid dark neutral background (`#111111`) — no textures or gradients, easy on the eyes on any screen |
+| **Fully Responsive** | Mobile-first design; works beautifully from 320 px to wide desktop |
+| **Minimalist Dark Theme** | Pure solid dark neutral background (`#111111`) — no gradients or textures, easy on every screen |
+| **Rate Limiting** | API routes are protected with per-IP rate limiting to prevent abuse |
+| **Input Validation** | All API payloads validated with Zod schemas — SQL injection and prompt injection resistant |
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack
 
 | Technology | Role |
 |---|---|
 | [Next.js 15](https://nextjs.org) (App Router) | React framework — pages, layouts, server-side API routes |
-| [TypeScript 5](https://typescriptlang.org) | Type safety throughout |
+| [TypeScript 5](https://typescriptlang.org) | Type safety throughout the entire codebase |
 | [Tailwind CSS 4](https://tailwindcss.com) | Utility-first styling with CSS custom properties |
-| [Groq API](https://console.groq.com) | Ultra-fast LLM for keyword extraction and personal reflections |
+| [Groq API](https://console.groq.com) | Ultra-fast LLM (Llama 3) for keyword extraction, reflections, du'a refinement |
+| [Groq Whisper](https://console.groq.com) | Voice-to-text transcription for hands-free input |
+| [Zod](https://zod.dev) | Runtime schema validation for all API request bodies |
 | [Adhan.js](https://github.com/batoulapps/adhan-js) | Offline Islamic prayer time calculations (Muslim World League method) |
 | [Hadith API](https://hadithapi.pages.dev) | Authenticated hadith search across Bukhari & Muslim |
+| [Al-Quran Cloud API](https://alquran.cloud/api) | Qur'anic verse lookup by keyword |
 | [html2canvas](https://html2canvas.hertzen.com) | Capture and download reflection cards as PNG images |
-| [EB Garamond](https://fonts.google.com/specimen/EB+Garamond) + [Playfair Display](https://fonts.google.com/specimen/Playfair+Display) | Elegant serif typography |
+| [DM Sans](https://fonts.google.com/specimen/DM+Sans) + [DM Serif Display](https://fonts.google.com/specimen/DM+Serif+Display) | Clean, modern minimalist typography |
 | [Amiri](https://fonts.google.com/specimen/Amiri) | Arabic script rendering |
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
 - [Node.js](https://nodejs.org) 18 or later
-- A free [Groq API key](https://console.groq.com)
+- A free [Groq API key](https://console.groq.com) (no credit card required)
 
 ### 1. Clone the repository
 
@@ -82,10 +101,8 @@ npm install
 
 ### 3. Configure environment variables
 
-Create a `.env.local` file in the project root:
-
 ```bash
-cp .env.example .env.local   # if .env.example exists, or create it manually
+cp .env.example .env.local
 ```
 
 Open `.env.local` and add your Groq API key:
@@ -93,8 +110,6 @@ Open `.env.local` and add your Groq API key:
 ```env
 GROQ_API_KEY=your_groq_api_key_here
 ```
-
-Get a free key at [console.groq.com](https://console.groq.com) — no credit card required.
 
 ### 4. Start the development server
 
@@ -106,62 +121,108 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## Environment Variables
+## 🔐 Environment Variables
 
 | Variable | Required | Description |
 |---|---|---|
-| `GROQ_API_KEY` | Yes | Powers keyword extraction and AI reflection generation via Groq's LLM API |
+| `GROQ_API_KEY` | **Yes** | Powers keyword extraction, AI reflections, du'a refinement, and voice transcription via Groq |
 
-> **Note:** Never commit `.env.local` to version control. It is already listed in `.gitignore`.
-
----
-
-## Project Structure
-
-```
-app/
-├── api/
-│   ├── chat/route.ts          # Extracts emotional keyword from user input
-│   ├── hadith/route.ts        # Fetches relevant hadith by keyword
-│   └── reflection/route.ts    # Generates personalised reflection via Groq
-├── components/
-│   ├── BottomNav.tsx          # Mobile bottom bar + desktop top navigation
-│   ├── Journal.tsx            # Saved reflection entries
-│   ├── SalahTimings.tsx       # Prayer times with live clock and city picker
-│   ├── Tasbeeh.tsx            # Dhikr counter with circular progress ring
-│   └── ui.tsx                 # Shared BackButton and CompactBrand atoms
-├── data/
-│   └── cities.ts              # City list with coordinates and timezones
-├── lib/
-│   └── journal.ts             # localStorage read/write helpers
-├── globals.css                # CSS custom properties, animations, component styles
-├── layout.tsx                 # Root layout, font loading, PWA metadata
-└── page.tsx                   # Main app — all screens and state management
-```
+> **Security note:** Never commit `.env.local` to version control. It is already in `.gitignore`.
 
 ---
 
-## Deployment
+## 📁 Project Structure
 
-The easiest way to deploy is with [Vercel](https://vercel.com) (free tier):
+```
+ummah-speaks/
+├── app/
+│   ├── api/
+│   │   ├── chat/route.ts          # Extracts emotional keyword from user input
+│   │   ├── hadith/route.ts        # Fetches relevant hadith by keyword
+│   │   ├── quran/route.ts         # Fetches a matching Qur'anic verse
+│   │   ├── reflection/route.ts    # Generates personalised AI reflection
+│   │   ├── refine/route.ts        # Refines a rough du'a into Arabic supplication
+│   │   └── transcribe/route.ts    # Voice-to-text via Groq Whisper
+│   ├── components/
+│   │   ├── BottomNav.tsx          # Mobile bottom bar + desktop top navigation
+│   │   ├── Journal.tsx            # Saved reflections + Favourites section
+│   │   ├── SalahTimings.tsx       # Prayer times with live clock and city picker
+│   │   ├── Tasbeeh.tsx            # Dhikr counter with circular progress ring
+│   │   └── ui.tsx                 # Shared BackButton and CompactBrand atoms
+│   ├── data/
+│   │   ├── cities.ts              # City list with coordinates and timezones
+│   │   └── names-of-allah.json    # 99 Names of Allah with transliterations and meanings
+│   ├── lib/
+│   │   ├── journal.ts             # localStorage read/write helpers
+│   │   ├── rate-limit.ts          # In-memory per-IP rate limiter for API routes
+│   │   └── validation.ts          # Zod schemas for all API request bodies
+│   ├── globals.css                # CSS custom properties, design tokens, component styles
+│   ├── layout.tsx                 # Root layout, font loading, PWA metadata
+│   └── page.tsx                   # Main app — all screens and state management
+├── public/
+├── .env.example
+├── .gitignore
+├── LICENSE
+├── next.config.ts
+├── package.json
+└── tsconfig.json
+```
+
+---
+
+## 🌐 Deployment
+
+Deploy in one click with [Vercel](https://vercel.com) (free tier):
 
 1. Push your code to GitHub
-2. Go to [vercel.com](https://vercel.com) → **New Project** → import your repo
-3. Under **Environment Variables**, add `GROQ_API_KEY`
+2. Go to [vercel.com](https://vercel.com) → **New Project** → import this repo
+3. Add `GROQ_API_KEY` under **Environment Variables**
 4. Click **Deploy**
 
 Your app will be live at a `*.vercel.app` URL within seconds.
 
 ---
 
-## Privacy
+## 🔒 Privacy
 
-- All journal entries are stored in your browser's `localStorage` — they never leave your device.
-- The only data sent to external servers is your typed feeling text (sent to Groq to generate a reflection). No names or personal identifiers are transmitted.
+- All journal entries live in your browser's `localStorage` — they **never leave your device**.
+- The only data sent to an external server is the text you type (sent to Groq to generate a reflection). No account, no name, no identifiers are transmitted.
+- API routes are rate-limited and all inputs are validated with Zod to prevent abuse.
 
 ---
 
-## Licence
+## 🗺 Roadmap
+
+- [ ] Offline support (Service Worker caching)
+- [ ] Multi-language reflections (Arabic, Urdu, Malay)
+- [ ] Dark / Light mode toggle
+- [ ] Share to social media (reflection card image)
+- [ ] Weekly Hadith email subscription
+- [ ] Community du'a board (optional, opt-in)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome. Please open an issue first to discuss what you'd like to change, then fork the repo and submit a pull request.
+
+```bash
+# Fork → clone your fork
+git clone https://github.com/<your-username>/Ummah-speaks.git
+
+# Create a feature branch
+git checkout -b feat/your-feature-name
+
+# Commit your changes
+git commit -m "feat: describe your change"
+
+# Push and open a Pull Request
+git push origin feat/your-feature-name
+```
+
+---
+
+## 📄 Licence
 
 MIT © [Rubayet Hassan](mailto:rrubayet321@gmail.com)
 
@@ -169,12 +230,12 @@ This project is open source under the MIT License. You are free to fork, adapt, 
 
 ---
 
-## Author
+## 👤 Author
 
-Built by **Rubayet Hassan**
+Built with love for the Ummah by **Rubayet Hassan**
 
-- Email: [rrubayet321@gmail.com](mailto:rrubayet321@gmail.com)
-- GitHub: [@rrubayet321](https://github.com/rrubayet321)
+[![GitHub](https://img.shields.io/badge/GitHub-rrubayet321-181717?style=flat-square&logo=github)](https://github.com/rrubayet321)
+[![Email](https://img.shields.io/badge/Email-rrubayet321%40gmail.com-ea4335?style=flat-square&logo=gmail&logoColor=white)](mailto:rrubayet321@gmail.com)
 
 ---
 
