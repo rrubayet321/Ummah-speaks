@@ -1,31 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, EB_Garamond, Cormorant_Garamond, Amiri } from "next/font/google";
+import { DM_Sans, DM_Serif_Display, Amiri } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
-const ebGaramond = EB_Garamond({
+/* Body text — clean, legible sans-serif (--font-body keeps all existing inline-style refs) */
+const dmSans = DM_Sans({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
+  weight: ["300", "400", "500"],
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+/* Display / headings — elegant serif with italic support */
+const dmSerif = DM_Serif_Display({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
+/* Arabic script */
 const amiri = Amiri({
   variable: "--font-amiri",
   subsets: ["arabic", "latin"],
@@ -38,7 +32,7 @@ export const metadata: Metadata = {
   title: "Ummah Speaks",
   description: "A quiet Islamic space to share how you feel — receive hadith guidance, personal reflections, prayer times and dhikr.",
   manifest: "/manifest.json",
-  authors: [{ name: "Rubayet Hassan", url: "mailto:rrubayet321@gmail.com" }],
+  authors: [{ name: "Rubayet Hassan", url: "https://github.com/rrubayet321" }],
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -65,14 +59,13 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="author" content="Rubayet Hassan" />
-        {/* Preconnect to Hadith API for faster first fetch */}
         <link rel="preconnect" href="https://hadithapi.pages.dev" />
-        {/* PWA icon references */}
+        <link rel="preconnect" href="https://api.alquran.cloud" />
         <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/icons/icon.svg" />
       </head>
       <body
-        className={`${playfair.variable} ${ebGaramond.variable} ${cormorant.variable} ${amiri.variable} antialiased`}
+        className={`${dmSans.variable} ${dmSerif.variable} ${amiri.variable} antialiased`}
       >
         {children}
       </body>

@@ -1,42 +1,85 @@
 @import "tailwindcss";
 
+/* ════════════════════════════════════════
+   DESIGN TOKENS — Clean Solid Dark
+   ════════════════════════════════════════ */
 :root {
-  --background:   #111111;      /* clean dark neutral           */
-  --surface:      #1C1C1C;      /* slightly lighter dark cards  */
-  --foreground:   #E8E3DC;      /* soft warm white text         */
-  --accent:       #52b788;      /* vibrant emerald              */
-  --accent-soft:  #74c69d;      /* lighter emerald hover/caret  */
-  --gold:         #d4a843;      /* luminous Islamic gold        */
-  --gold-soft:    #e8c272;      /* soft gold for glows          */
-  --muted:        #8A8A8A;      /* neutral grey                 */
-  --divider:      #2A2A2A;      /* clean neutral dark divider   */
-  --placeholder:  #555555;      /* neutral grey placeholder     */
+  --background:    #111111;   /* pure solid black                   */
+  --surface:       #1A1A1A;   /* card base                          */
+  --surface-2:     #222222;   /* interactive inputs                 */
+  --foreground:    #F2EEE6;   /* bright warm white                  */
+  --accent:        #4C9D72;   /* Islamic emerald                    */
+  --accent-soft:   #6BBE8D;   /* lighter emerald                    */
+  --gold:          #C69040;   /* warm amber gold                    */
+  --gold-soft:     #DBA860;   /* soft gold                          */
+  --muted:         #9A9690;   /* neutral grey                       */
+  --divider:       #2A2A2A;   /* solid dark divider                 */
+  --placeholder:   #606060;   /* input placeholder                  */
+  --error:         #A84848;   /* muted error red                    */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-gold:       var(--gold);
-  --font-heading: var(--font-playfair);
-  --font-body:    var(--font-body);
 }
 
-* {
-  box-sizing: border-box;
-}
+/* ════════ RESETS ════════ */
 
-/* Remove 300ms tap delay on mobile for all interactive elements */
+* { box-sizing: border-box; }
+
 button, a, input, textarea, select {
   touch-action: manipulation;
 }
 
-/* Smooth scrolling for the whole page */
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 
-/* Screen-reader only — visually hidden but accessible */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ════════ BASE ════════ */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  position: relative;
+
+  /* Font aliases scoped to body so they can reference Next.js class-injected vars */
+  --font-playfair:  var(--font-display);
+  --font-cormorant: var(--font-display);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ════════ TYPOGRAPHY ════════ */
+
+textarea::placeholder {
+  color: var(--placeholder);
+  transition: opacity 0.4s ease;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+input::placeholder {
+  color: var(--placeholder);
+}
+
+/* ════════ ACCESSIBILITY ════════ */
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -49,126 +92,51 @@ html {
   border-width: 0;
 }
 
-/* Visible focus ring for keyboard users */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid color-mix(in srgb, var(--accent) 70%, transparent);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+/* ════════ LAYOUT UTILITIES ════════ */
+
+.has-bottom-nav {
+  padding-bottom: 5.5rem;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body), "Georgia", serif;
+@media (min-width: 768px) {
+  .has-bottom-nav {
+    padding-bottom: 2.5rem;
+    padding-top: 4.5rem;
+  }
 }
 
-textarea::placeholder {
-  color: var(--placeholder);
-  font-style: italic;
-}
-
-textarea:focus {
-  outline: none;
-}
-
-main {
-  position: relative;
-  z-index: 1;
-}
+/* ════════ ANIMATIONS ════════ */
 
 @keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
 }
 
 .fade-slide-in {
-  animation: fadeSlideIn 0.9s ease forwards;
+  animation: fadeSlideIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* ── Brand glow animations ── */
-@keyframes arabicGlow {
-  0%, 100% {
-    text-shadow:
-      0 0 10px color-mix(in srgb, var(--gold) 50%, transparent),
-      0 0 24px color-mix(in srgb, var(--accent) 25%, transparent);
-  }
-  50% {
-    text-shadow:
-      0 0 18px color-mix(in srgb, var(--gold) 70%, transparent),
-      0 0 38px color-mix(in srgb, var(--accent) 35%, transparent);
-  }
-}
+.fade-slide-in-delay-1 { animation: fadeSlideIn 0.7s 0.08s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.fade-slide-in-delay-2 { animation: fadeSlideIn 0.7s 0.16s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.fade-slide-in-delay-3 { animation: fadeSlideIn 0.7s 0.24s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
-@keyframes wordmarkGlow {
-  0%, 100% {
-    text-shadow:
-      0 0 8px color-mix(in srgb, var(--gold) 35%, transparent),
-      0 0 16px color-mix(in srgb, var(--accent) 20%, transparent);
-  }
-  50% {
-    text-shadow:
-      0 0 14px color-mix(in srgb, var(--gold) 55%, transparent),
-      0 0 28px color-mix(in srgb, var(--accent) 30%, transparent);
-  }
-}
-
-.brand-arabic {
-  animation: arabicGlow 4s ease-in-out infinite;
-}
-
-.brand-wordmark {
-  animation: wordmarkGlow 4s ease-in-out infinite;
-}
-
-/* ── Sheikh / Learn to Pray card glow ── */
-@keyframes sheikCardPulse {
-  0%, 100% {
-    box-shadow:
-      0 4px 20px color-mix(in srgb, var(--gold) 15%, transparent),
-      0 0 0 1px color-mix(in srgb, var(--gold) 25%, transparent);
-  }
-  50% {
-    box-shadow:
-      0 6px 32px color-mix(in srgb, var(--gold) 28%, transparent),
-      0 0 0 1px color-mix(in srgb, var(--gold) 50%, transparent);
-  }
-}
-
-.sheikh-card {
-  animation: sheikCardPulse 4s ease-in-out infinite;
-}
-
-/* ── Islamic geometric arabesque background ── */
-.arabesque-bg {
-  position: relative;
-  overflow: hidden;
-}
-
-/* ── Brand logo spring scale-in ── */
+/* Brand entrance */
 @keyframes brandScaleIn {
-  0%   { opacity: 0; transform: scale(0.55); }
-  65%  { transform: scale(1.06); }
-  100% { opacity: 1; transform: scale(1); }
+  0%   { opacity: 0; transform: scale(0.92) translateY(8px); }
+  100% { opacity: 1; transform: scale(1)    translateY(0);   }
 }
 
 .brand-scale-in {
-  animation: brandScaleIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: brandScaleIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ── Streaming calligrapher cursor ── */
+/* Streaming text cursor */
 @keyframes cursorBlink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0; }
@@ -176,184 +144,119 @@ main {
 
 .streaming-cursor::after {
   content: "▎";
-  animation: cursorBlink 0.85s ease-in-out infinite;
+  animation: cursorBlink 0.9s ease-in-out infinite;
   color: var(--accent-soft);
   font-weight: 300;
   margin-left: 2px;
   font-style: normal;
 }
 
-/* ── Mihrab arch frame (reflection container) ── */
-.mihrab-frame {
-  border-radius: 120px 120px 16px 16px / 44px 44px 16px 16px;
-  background: var(--surface);
-  border: 1px solid color-mix(in srgb, var(--gold) 20%, var(--divider));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold) 8%, transparent);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Gold arc accent at the top of the mihrab arch */
-.mihrab-frame::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 3px;
-  background: linear-gradient(to right, transparent, var(--gold), var(--gold-soft), var(--gold), transparent);
-  border-radius: 0 0 50% 50%;
-  opacity: 0.55;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ── Manuscript double-border card (hadith) ── */
-.manuscript-card {
-  position: relative;
-  border-radius: 20px;
-  background: var(--surface);
-  border: 1px solid color-mix(in srgb, var(--gold) 22%, var(--divider));
-  box-shadow:
-    0 2px 28px color-mix(in srgb, var(--gold) 8%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--gold) 10%, transparent);
-  overflow: visible;
-  padding-top: 22px;
-  padding-bottom: 22px;
-}
-
-/* vine-border stripes are painted inside here via separate ::before/::after
-   so we need a second pseudo-element layer for the inner double-border */
-.manuscript-card .inner-border {
-  position: absolute;
-  inset: 5px;
-  border-radius: 15px;
-  border: 1px solid color-mix(in srgb, var(--gold) 18%, transparent);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Begin button active glow ── */
-@keyframes beginGlow {
-  0%, 100% { box-shadow: 0 0 0 0   color-mix(in srgb, var(--accent) 0%,  transparent); }
-  50%       { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent),
-                          0 4px 16px color-mix(in srgb, var(--accent) 12%, transparent); }
-}
-
-.begin-btn-active {
-  animation: beginGlow 2.8s ease-in-out infinite;
-}
-
-/* ── Tasbeeh tap feedback ── */
+/* Tasbeeh interactions */
 @keyframes tasbeehPulse {
   0%   { transform: scale(1);    box-shadow: 0 0 0 0   color-mix(in srgb, var(--gold) 0%,  transparent); }
-  40%  { transform: scale(0.95); box-shadow: 0 0 0 8px color-mix(in srgb, var(--gold) 32%, transparent); }
+  40%  { transform: scale(0.96); box-shadow: 0 0 0 10px color-mix(in srgb, var(--gold) 28%, transparent); }
   100% { transform: scale(1);    box-shadow: 0 0 0 0   color-mix(in srgb, var(--gold) 0%,  transparent); }
 }
 
-.tasbeeh-tap {
-  animation: tasbeehPulse 0.18s ease-out;
-}
+.tasbeeh-tap { animation: tasbeehPulse 0.2s ease-out; }
 
-/* ── Tasbeeh complete flash ── */
 @keyframes completeFlash {
   0%   { background: var(--surface); box-shadow: 0 0 0 0   color-mix(in srgb, var(--gold) 0%,  transparent); }
-  40%  { background: color-mix(in srgb, var(--gold) 14%, var(--surface)); box-shadow: 0 0 0 10px color-mix(in srgb, var(--gold) 25%, transparent); }
+  40%  { background: color-mix(in srgb, var(--gold) 12%, var(--surface)); box-shadow: 0 0 0 12px color-mix(in srgb, var(--gold) 20%, transparent); }
   100% { background: var(--surface); box-shadow: 0 0 0 0   color-mix(in srgb, var(--gold) 0%,  transparent); }
 }
 
-.tasbeeh-complete {
-  animation: completeFlash 0.5s ease-out;
+.tasbeeh-complete { animation: completeFlash 0.55s ease-out; }
+
+/* Voice recording pulse */
+@keyframes recordPulse {
+  0%   { box-shadow: 0 0 0 0   rgba(168, 72, 72, 0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(168, 72, 72, 0);   }
+  100% { box-shadow: 0 0 0 0   rgba(168, 72, 72, 0);   }
 }
 
-/* ── Bottom navigation blur background ── */
-.bottom-nav-blur {
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+/* Name of Allah reveal */
+@keyframes nameReveal {
+  from { opacity: 0; transform: scale(0.94) translateY(6px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);   }
 }
 
-/* ── Reflection textarea container ── */
+.name-reveal { animation: nameReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Suggestion chip entrance */
+@keyframes chipFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+.chip-fade-in { animation: chipFadeIn 0.35s ease-out both; }
+
+/* ════════ NAVIGATION ════════ */
+
+/* ════════ INPUT AREA ════════ */
+
 .reflection-input {
-  border-radius: 16px;
-  background: var(--surface);
-  border: 1px solid color-mix(in srgb, var(--gold) 18%, var(--divider));
-  padding: clamp(14px, 4vw, 20px);
+  border-radius: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--divider);
+  padding: clamp(16px, 4vw, 22px);
   padding-bottom: 12px;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .reflection-input:focus-within {
-  border-color: color-mix(in srgb, var(--gold) 45%, transparent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 10%, transparent),
-              0 4px 24px color-mix(in srgb, var(--gold) 8%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 8%, transparent);
 }
 
-/* ── Journal card expand transition ── */
+/* ════════ CARDS ════════ */
+
+.manuscript-card {
+  position: relative;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  overflow: hidden;
+}
+
+/* inner-border intentionally removed — hide the old double-border */
+.manuscript-card .inner-border {
+  display: none;
+}
+
+/* Plain rounded reflection / du'a container — replaces arch styling */
+.mihrab-frame {
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+}
+
+.name-of-allah-card {
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+}
+
+.quran-verse-card {
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: 14px;
+}
+
+/* ════════ JOURNAL ════════ */
+
 .journal-card {
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .journal-card:hover {
-  box-shadow:
-    0 4px 20px color-mix(in srgb, var(--gold) 12%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--gold) 15%, transparent);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  border-color: var(--muted) !important;
 }
 
-/* ── Mobile bottom padding / Desktop top padding for nav ── */
-.has-bottom-nav {
-  padding-bottom: 5.5rem;
-}
+/* ════════ SELECT ════════ */
 
-@media (min-width: 768px) {
-  .has-bottom-nav {
-    padding-bottom: 2rem;
-    padding-top: 4.5rem;
-  }
-}
-
-/* ── Arabesque vine scroll border (top + bottom edges) ── */
-/*
-  The SVG encodes a repeating gold arabesque vine:
-  a flowing sinusoidal stem with leaf pairs branching off every wave,
-  small circle buds at the peaks, and a diamond ornament at centre.
-  stroke colour is hardcoded to #d4a843 (--gold) so it works inside
-  data-URI without needing CSS variable resolution.
-*/
-.vine-border {
-  position: relative;
-}
-
-.vine-border::before,
-.vine-border::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 22px;
-  pointer-events: none;
-  z-index: 1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='22'%3E%3C!-- main vine wave --%3E%3Cpath d='M0 11 C10 4 20 4 30 11 C40 18 50 18 60 11 C70 4 80 4 90 11 C100 18 110 18 120 11' fill='none' stroke='%23d4a843' stroke-width='1.2'/%3E%3C!-- left leaf up --%3E%3Cpath d='M15 7.5 C17 4 21 4 22 7' fill='none' stroke='%23d4a843' stroke-width='0.9'/%3E%3C!-- left leaf down --%3E%3Cpath d='M45 14.5 C47 18 51 18 52 15' fill='none' stroke='%23d4a843' stroke-width='0.9'/%3E%3C!-- right leaf up --%3E%3Cpath d='M75 7.5 C77 4 81 4 82 7' fill='none' stroke='%23d4a843' stroke-width='0.9'/%3E%3C!-- right leaf down --%3E%3Cpath d='M105 14.5 C107 18 111 18 112 15' fill='none' stroke='%23d4a843' stroke-width='0.9'/%3E%3C!-- bud at left peak --%3E%3Ccircle cx='30' cy='11' r='1.6' fill='%23d4a843' opacity='0.85'/%3E%3C!-- bud at right peak --%3E%3Ccircle cx='90' cy='11' r='1.6' fill='%23d4a843' opacity='0.85'/%3E%3C!-- centre diamond ornament --%3E%3Cpath d='M60 7 L63.2 11 L60 15 L56.8 11 Z' fill='none' stroke='%23d4a843' stroke-width='0.9'/%3E%3Ccircle cx='60' cy='11' r='1' fill='%23d4a843' opacity='0.7'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-size: 120px 22px;
-}
-
-.vine-border::before {
-  top: 0;
-}
-
-.vine-border::after {
-  bottom: 0;
-  transform: scaleY(-1);
-}
-
-/* ── Kufic geometric interlace frame ── */
-/*
-  border-image with an SVG tile of interlocking 8-pointed stars
-  in the accent emerald. The 9-slice value of 12 carves corners
-  cleanly so the repeat looks continuous on all four sides.
-*/
-.kufic-border {
-  border: 10px solid transparent;
-  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3C!-- outer square --%3E%3Crect x='1' y='1' width='46' height='46' fill='none' stroke='%2352b788' stroke-width='0.6'/%3E%3C!-- 8-pointed star (two overlapping squares) --%3E%3Cpolygon points='24,4 27.5,16.5 40,13 30.5,22 40,31 27.5,27.5 24,40 20.5,27.5 8,31 17.5,22 8,13 20.5,16.5' fill='none' stroke='%2352b788' stroke-width='0.8'/%3E%3C!-- inner square rotated 45 --%3E%3Crect x='17' y='17' width='14' height='14' fill='none' stroke='%2352b788' stroke-width='0.6' transform='rotate(45 24 24)'/%3E%3C!-- centre dot --%3E%3Ccircle cx='24' cy='24' r='2' fill='%2352b788' opacity='0.5'/%3E%3C/svg%3E") 12 round;
-  border-radius: 20px;
+select option {
+  background: #222222;
+  color: var(--foreground);
 }
