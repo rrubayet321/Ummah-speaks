@@ -1,27 +1,12 @@
 import Groq from "groq-sdk";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { rateLimitChat } from "@/app/lib/rate-limit";
+import { chatBodySchema } from "@/app/lib/validation";
 
 const ISLAMIC_KEYWORDS = [
-  "Sabr",
-  "Dua",
-  "Tawakkul",
-  "Shukr",
-  "Tawbah",
-  "Dhikr",
-  "Iman",
-  "Ikhlas",
-  "Loneliness",
-  "Anxiety",
-  "Grief",
-  "Hope",
-  "Gratitude",
-  "Purpose",
-  "Forgiveness",
-  "Love",
-  "Anger",
-  "Fear",
-  "Depression",
-  "Contentment",
+  "Sabr", "Dua", "Tawakkul", "Shukr", "Tawbah", "Dhikr", "Iman",
+  "Ikhlas", "Loneliness", "Anxiety", "Grief", "Hope", "Gratitude",
+  "Purpose", "Forgiveness", "Love", "Anger", "Fear", "Depression", "Contentment",
 ];
 
 const SYSTEM_PROMPT = `You are a compassionate Islamic emotional wellness assistant.
@@ -36,51 +21,53 @@ Rules:
 - If the emotion is complex, choose the most dominant theme.
 - Always pick from the allowed list above.`;
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
+  const rate = rateLimitChat(req);
+  if (!rate.ok) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later.", retryAfter: rate.retryAfter },
+      { status: 429, headers: rate.retryAfter ? { "Retry-After": String(rate.retryAfter) } : undefined }
+    );
+  }
+
+  let body: unknown;
   try {
-    const { message } = await req.json();
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
+  }
 
-    if (!message || typeof message !== "string" || message.trim().length === 0) {
-      return NextResponse.json(
-        { error: "Message is required." },
-        { status: 400 }
-      );
-    }
+  const parsed = chatBodySchema.safeParse(body);
+  if (!parsed.success) {
+    const msg = parsed.error.flatten().formErrors[0] ?? "Invalid request.";
+    return NextResponse.json({ error: msg }, { status: 400 });
+  }
 
-    const apiKey = process.env.GROQ_API_KEY;
-    if (!apiKey) {
-      return NextResponse.json(
-        { error: "Groq API key is not configured." },
-        { status: 500 }
-      );
-    }
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json({ error: "Service unavailable." }, { status: 503 });
+  }
 
+  try {
     const groq = new Groq({ apiKey });
 
     const completion = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: message.trim() },
+        { role: "user", content: parsed.data.message },
       ],
       temperature: 0.3,
       max_tokens: 10,
     });
 
     const raw = completion.choices[0]?.message?.content?.trim() ?? "";
-
-    // Validate the returned keyword is from the allowed list (case-insensitive)
-    const matched = ISLAMIC_KEYWORDS.find(
-      (k) => k.toLowerCase() === raw.toLowerCase()
-    );
-    const keyword = matched ?? "Sabr"; // safe fallback
+    const matched = ISLAMIC_KEYWORDS.find((k) => k.toLowerCase() === raw.toLowerCase());
+    const keyword = matched ?? "Sabr";
 
     return NextResponse.json({ keyword });
   } catch (err) {
     console.error("[/api/chat] Error:", err);
-    return NextResponse.json(
-      { error: "Something went wrong. Please try again." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
 }
