@@ -79,6 +79,91 @@ No accounts. No tracking. Your reflections stay on your device.
 
 ---
 
+## 🏗 Architecture
+
+### High-level overview
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        Browser (Client)                         │
+│                                                                 │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
+│  │  page.tsx    │  │  Journal.tsx │  │  SalahTimings.tsx    │  │
+│  │  (main app)  │  │  Favourites  │  │  Tasbeeh.tsx         │  │
+│  └──────┬───────┘  └──────┬───────┘  └──────────────────────┘  │
+│         │                 │                                     │
+│         │  fetch()        │  localStorage                       │
+│         ▼                 ▼                                     │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │              Next.js App Router (Edge/Node)               │  │
+│  │                                                           │  │
+│  │  /api/chat        → keyword extraction                   │  │
+│  │  /api/hadith      → hadith lookup                        │  │
+│  │  /api/quran       → Qur'anic verse lookup                │  │
+│  │  /api/reflection  → personalised AI reflection           │  │
+│  │  /api/refine      → du'a refinement                      │  │
+│  │  /api/transcribe  → voice → text                         │  │
+│  └───────────┬───────────────────────┬───────────────────────┘  │
+└──────────────┼───────────────────────┼──────────────────────────┘
+               │                       │
+               ▼                       ▼
+   ┌───────────────────┐   ┌──────────────────────────┐
+   │     Groq API      │   │     External Data APIs   │
+   │                   │   │                          │
+   │  Llama 3 (LLM)    │   │  hadithapi.pages.dev     │
+   │  ├ keyword extract│   │  alquran.cloud/api       │
+   │  ├ reflection gen │   │  (Qur'anic verses)       │
+   │  ├ du'a refiner   │   │                          │
+   │  └ Whisper (STT)  │   │  Adhan.js (offline)      │
+   └───────────────────┘   │  (prayer time calc)      │
+                           └──────────────────────────┘
+```
+
+### Request flow — Reflect screen
+
+```
+User types feeling
+       │
+       ▼
+[1] POST /api/chat
+    └─ Groq Llama 3 extracts a 1-2 word Islamic keyword
+       │
+       ▼
+[2] POST /api/hadith  ──┐
+    POST /api/quran   ──┤  Parallel fetches once keyword is known
+    (Names of Allah   ──┘  matched client-side from names-of-allah.json)
+       │
+       ▼
+[3] POST /api/reflection
+    └─ System prompt shaped by intent mode (feeling / guidance / dua-for)
+    └─ User prompt enriched with: keyword · Name of Allah · Qur'anic verse · hadith
+    └─ Groq Llama 3 returns a 2–3 sentence personalised reflection
+       │
+       ▼
+[4] Reflection card rendered
+    └─ User can: Save to Journal · Star as Favourite · Share as PNG
+```
+
+### Data layer
+
+| Layer | Technology | What lives here |
+|---|---|---|
+| Client state | React `useState` / `useEffect` | UI state, fetched results, input value |
+| Persistence | Browser `localStorage` | Journal entries (last 10), Favourites |
+| Server state | Next.js API Routes (stateless) | No DB — every request is independent |
+| Secrets | `.env.local` → Vercel env vars | `GROQ_API_KEY` only |
+
+### Security model
+
+| Concern | Mitigation |
+|---|---|
+| Prompt injection | Zod trims and length-caps all string inputs before they reach the LLM |
+| API abuse | Per-IP in-memory rate limiter on every API route (`lib/rate-limit.ts`) |
+| Secret exposure | API key lives server-side only; never sent to the browser |
+| Data privacy | No database — journal entries never leave the user's device |
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
